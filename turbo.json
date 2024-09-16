@@ -2,13 +2,19 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "tasks": {
-    "test": {},
+    "test": {
+      "dependsOn": [
+        "^test"
+      ]
+    },
     "test:watch": {
       "cache": false,
       "persistent": true
     },
     "build": {
-      "dependsOn": [
+      "dependsOn": [        
+        "lint",
+        "test",
         "^build"
       ],
       "inputs": [
@@ -26,6 +32,11 @@
       ]
     },
     "dev": {
+      "dependsOn": [ 
+        "lint",
+        "test",
+        "^dev"
+      ],
       "cache": false,
       "persistent": true
     }

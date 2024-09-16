@@ -16,6 +16,16 @@
   font-synthesis: none;
 }
 
+.testinput {
+  /* styles for input not in a label  */
+  border: tomato 2px solid;
+}
+.testlabel {
+  /* styles for label */
+  font-family: system-ui;
+  font-size: 1.25rem;
+}
+
 @media (prefers-color-scheme: dark) {
   .page {
     --gray-rgb: 255, 255, 255;
