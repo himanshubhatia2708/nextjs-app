@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --themeBlueColor:  #0F69AF;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,8 +25,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
-
-.bg-shell-header {
-  background-color: #0F69AF;
 }

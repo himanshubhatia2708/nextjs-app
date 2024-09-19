@@ -1,4 +1,4 @@
-import { UserIcon, ImageRender, DynamicSvg } from './IconUtilities';
+import { UserIcon, ImageRender, DynamicSvg } from '@/app/components/IconUtilities';
 
 type ButtonsObj = {
     iconName: string,
@@ -31,10 +31,16 @@ const buttonsArray: ButtonsObj[] = [
         height: 20,
     },
 ];
-
+const dynamicSvgObj: ButtonsObj = {
+    svgPath: "/icons/cart-icon.svg",
+    iconName: "cart",
+    iconClassName: 'icon-cart',
+    width: 33,
+    height: 22
+}
 const Header = () => {
     return (
-        <header className="absolute top-0 left-0 w-full h-10 bg-shell-header flex items-center justify-between px-4 shadow-sm">
+        <header className="absolute top-0 left-0 w-full h-10 bg-themeBlueColor flex items-center justify-between px-4 shadow-sm">
             <div className="flex items-center space-x-4">
                 <ImageRender
                     svgPath={"/icons/aidd-icon-shell.svg"}
@@ -46,13 +52,13 @@ const Header = () => {
             <div className="flex items-center space-x-4">
                 {
                     buttonsArray.map((button, index) => {
-                        const {iconName, svgPath, width, height} = button
+                        const { iconName, svgPath, width, height } = button
                         return (<span key={index} className={button.iconClassName}>
                             <ImageRender {...{ iconName, svgPath, width, height }} />
                         </span>)
                     })
                 }
-                <DynamicSvg initials='12' />
+                <DynamicSvg initials='12' svgDetails= {dynamicSvgObj} />
                 <UserIcon initials='A' />
             </div>
         </header>
