@@ -1,5 +1,5 @@
 .customHeadline {
-    color: var(--Full-Color-Set-Neutral-999);
+    color: #000000;
     font-family: 'Lato', sans-serif;
     font-size: 32px;
     font-weight: 700;
@@ -7,7 +7,7 @@
   }
   
   .customEmailLabel {
-    color: var(--Full-Color-Set-Neutral-999);
+    color: #000000;
     font-family: 'Lato', sans-serif;
     font-size: 14px;
     font-weight: 700;
