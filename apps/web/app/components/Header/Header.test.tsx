@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Header from './Header';
 
 
@@ -50,6 +50,8 @@ describe('Header Component', () => {
 
     test('UserIcon is clickable', () => {
         const userIcon = screen.getByText(userInitials);
-        userIcon.click();
+        
+        fireEvent.click(userIcon);
+        
     });
 });

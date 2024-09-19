@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { ImageRender } from './IconUtilities';
+
 import React from 'react';
+import { ImageRender } from '../IconUtilities/ImageRender';
 
 type BreadCrumbsObj= {
     label: string;
