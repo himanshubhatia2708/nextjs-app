@@ -1,6 +1,6 @@
 # Aidd Syncoop app
 
-This is an official starter Turborepo.
+This is an official Aidd Syncoop application with UI & API built with NextJS.
 
 ## Download NodeJS
 Download NodeJS version v20.11.1 with NPM version 10.8.3
