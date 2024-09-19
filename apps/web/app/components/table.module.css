@@ -3,9 +3,23 @@
   color: #50a0de !important;
   font-size: 14px;
   line-height: 16.8px;
+  text-transform: unset !important;
 }
 
 .search {
   background: #c7c7d1;
   border: 1px solid #c7c7d1;
+}
+
+.my_popup_form {
+  display: inline-block;
+}
+
+.btn-form {
+  height: 2.3125rem;
+  padding: 0.5rem;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  border: 1px solid #0f69af;
+  background: #0f69af;
 }

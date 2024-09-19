@@ -1,9 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@use 'devextreme/dist/css/dx.material.blue.light.css';
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -26,13 +23,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
-
-.dx-datagrid-headers {
-  color: #0f69af !important;
-}
-
-.dx-button-text {
-  text-transform: unset !important;
-  color: #0f69af !important;
 }

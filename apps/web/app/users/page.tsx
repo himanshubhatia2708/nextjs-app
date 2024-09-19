@@ -1,8 +1,8 @@
-import Table from '../components/Table';
-import Button from 'devextreme-react/button';
-import Tabs, { Item } from 'devextreme-react/tabs';
-import Image from 'next/image';
-import styles from './page.module.css';
+import Table from "../components/Table";
+import Image from "next/image";
+import styles from "./page.module.css";
+import { tableFields } from "./constants";
+import ToolbarComponent from "../components/toolBarOtions";
 
 const ViewUsers = async () => {
   return (
@@ -12,11 +12,12 @@ const ViewUsers = async () => {
           src="/icons/organization.svg"
           width={20}
           height={20}
-          alt="Picture of the author"
+          alt="organization"
         />
         <span className="pl-2">Customer Organizations</span>
       </div>
-      <Table />
+      <ToolbarComponent createFields={tableFields.createFields} />
+      <Table tableFields={tableFields} />
     </div>
   );
 };

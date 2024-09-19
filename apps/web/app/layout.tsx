@@ -27,14 +27,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="dx-theme"
-          data-theme="material.teal.light"
-          href="dx.material.blue.light.css"
-          data-active="true"
-        ></link>
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
