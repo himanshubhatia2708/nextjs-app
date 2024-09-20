@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import styles from "./page.module.css";
 
-export default function Page() {
+export default function Login() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -50,7 +50,7 @@ export default function Page() {
                                 type="email"
                                 id="email"
                                 name="email"
-                                className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+                                className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
                                 placeholder="Enter your email"
                                 required
                             />
@@ -61,11 +61,11 @@ export default function Page() {
                                 type="password"
                                 id="password"
                                 name="password"
-                                className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+                                className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
                                 placeholder="Enter your password"
                                 required
                             />
-                            <div className="w-96 h-5 justify-start items-start gap-1.5 inline-flex">
+                            <div className="w-96 h-5 flex items-start gap-1.5">
                                 <div className="w-3.5 h-3.5 relative">
                                     <Image
                                         src="/icons/info-icon.svg"
@@ -75,7 +75,7 @@ export default function Page() {
                                         height={15}
                                     />
                                 </div>
-                                <div className="grow shrink basis-0 self-stretch text-black text-sm font-bold font-['Lato'] leading-tight tracking-tight">
+                                <div className="text-black text-sm font-bold leading-tight">
                                     <Link href={'/login'}>
                                         Forgot password?
                                     </Link>
@@ -83,8 +83,8 @@ export default function Page() {
                             </div>
                         </div>
                         <div className="mb-6 flex flex-col gap-2">
-                            <button type="submit" className="w-24 h-10 p-3 bg-[#0f69af] rounded flex-col justify-center items-center inline-flex">
-                                <div className="text-center text-white text-base font-bold font-['Lato'] leading-tight">
+                            <button type="submit" className="w-24 h-10 p-3 bg-[#0f69af] rounded flex justify-center items-center">
+                                <div className="text-center text-white text-base font-bold leading-tight">
                                     Login
                                 </div>
                             </button>
