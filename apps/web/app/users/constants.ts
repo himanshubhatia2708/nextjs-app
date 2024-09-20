@@ -14,10 +14,13 @@ export const tableFields = {
   editable: true,
   editingMode: "popup",
   editFields: [
-    { dataField: "organizationName" },
+    {
+      dataField: "organizationName",
+      required: "Organization name is required",
+    },
     { type: "radio", dataField: "organizationStatus", items: status },
     { dataField: "numberAndDateTimeFormat" },
-    { dataField: "timeZone" },
+    { type: "dxSelectBox", dataField: "timeZone" },
     { dataField: "primaryContact" },
   ],
   toolbar: true,

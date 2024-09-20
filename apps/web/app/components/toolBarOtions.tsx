@@ -1,48 +1,50 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-// import { Toolbar, Item } from "devextreme-react/data-grid";
 import Button from "devextreme-react/button";
 import { Popup as Modal } from "devextreme-react/popup";
 import styles from "./table.module.css";
+import "./table.css";
 import {
   Form as CreateForm,
   SimpleItem,
   ButtonItem,
   ButtonOptions,
+  RequiredRule,
+  EmailRule,
 } from "devextreme-react/form";
+import { getTimeZones } from "devextreme/time_zone_utils";
 
-interface TableProps {
-  createFields: createFieldType;
-}
-
-interface createFieldType {
-  dataField: string;
-  type?: string;
-  items?: string[];
-}
-
-const ToolbarComponent: React.FC<TableProps> = ({ createFields }) => {
+const ToolbarComponent = () => {
   const [createPopupVisible, setCreatePopupVisibility] = useState(false);
+
+  const timeZones = getTimeZones(new Date());
 
   const renderContent = () => {
     return (
       <CreateForm>
-        {createFields.map(({ dataField }) => (
-          <SimpleItem key={dataField} dataField={dataField}></SimpleItem>
-        ))}
-        {/* <SimpleItem
+        <SimpleItem dataField="organizationName">
+          <RequiredRule message="Organization name is required" />
+        </SimpleItem>
+        <SimpleItem dataField="organizationAdminFirstName" />
+        <SimpleItem dataField="organizationAdminLastName" />
+        <SimpleItem dataField="organizationAdminEmailAddress">
+          <RequiredRule message="Email is required" />
+          <EmailRule message="Invalid Email Address" />
+        </SimpleItem>
+        <SimpleItem dataField="Number & Date Time format" />
+        <SimpleItem
           dataField="timeZone"
           editorType="dxSelectBox" // Using SelectBox as an editor
           editorOptions={{
             dataSource: timeZones,
             placeholder: "Select a time zone",
             searchEnabled: true, // Enable searching in the dropdown
-            displayExpr: (item) => item, // Display the timezone string
-            valueExpr: (item) => item, // Use the timezone string as the value
+            displayExpr: "title", // Display the timezone string
+            valueExpr: "title", // Use the timezone string as the value
           }}
-        /> */}
-        <ButtonItem>
+        />
+        <ButtonItem horizontalAlignment="left" cssClass="btnform">
           <ButtonOptions text="Create Customer" useSubmitBehavior={true} />
         </ButtonItem>
       </CreateForm>
@@ -76,6 +78,7 @@ const ToolbarComponent: React.FC<TableProps> = ({ createFields }) => {
         height="100%"
         position={{ my: "top right", at: "top right", of: window }}
         onHiding={() => setCreatePopupVisibility(false)}
+        showCloseButton={true}
       />
 
       <Button

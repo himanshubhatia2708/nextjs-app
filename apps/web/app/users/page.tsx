@@ -16,7 +16,7 @@ const ViewUsers = async () => {
         />
         <span className="pl-2">Customer Organizations</span>
       </div>
-      <ToolbarComponent createFields={tableFields.createFields} />
+      <ToolbarComponent />
       <Table tableFields={tableFields} />
     </div>
   );

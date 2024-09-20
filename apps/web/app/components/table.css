@@ -81,3 +81,27 @@ input {
   font-weight: 700;
   line-height: normal;
 }
+
+.btnform {
+  .dx-button {
+    height: 2.3125rem;
+    padding: 0.5rem;
+    gap: 0.625rem;
+    flex-shrink: 0;
+    border: 1px solid #0f69af;
+    background-color: #0f69af !important;
+  }
+  .dx-button-text {
+    color: #fff;
+    font-family: Lato;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: unset !important;
+  }
+}
+
+.dx-toolbar:last-child {
+  display: none !important;
+}
