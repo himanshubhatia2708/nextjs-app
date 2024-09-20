@@ -59,12 +59,7 @@ const ToolbarComponent = () => {
         className={`${styles.button_primary} mr-2.5`}
         render={(buttonData) => (
           <>
-            <Image
-              src="/icons/plus.svg"
-              width={20}
-              height={20}
-              alt="Picture of the author"
-            />
+            <Image src="/icons/plus.svg" width={20} height={20} alt="Create" />
             <span className="pl-2">{buttonData.text}</span>
           </>
         )}

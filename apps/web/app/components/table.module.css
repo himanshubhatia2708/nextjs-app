@@ -1,16 +1,15 @@
 .button_primary {
   background: #ecf5fc !important;
   color: #50a0de !important;
-  font-size: 14px;
-  line-height: 16.8px;
+  font-family: Lato;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
   text-transform: unset !important;
 }
 
 .search {
   background: #c7c7d1;
   border: 1px solid #c7c7d1;
-}
-
-.my_popup_form {
-  display: inline-block;
 }

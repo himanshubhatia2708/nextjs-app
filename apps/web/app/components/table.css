@@ -102,6 +102,65 @@ input {
   }
 }
 
+.button_form_seconday {
+  .dx-button {
+    background: #ecf5fc !important;
+    color: #50a0de !important;
+  }
+  .dx-button-text {
+    font-family: Lato;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: unset !important;
+  }
+}
+
+.btn_secondary {
+  background: #ecf5fc !important;
+  color: #50a0de !important;
+  font-family: Lato;
+  font-size: 0.875rem;
+  font-style: normal;
+
+  .dx-button-text {
+    font-weight: 700;
+    line-height: normal;
+    text-transform: unset !important;
+  }
+}
+
+.btn_primary {
+  height: 2.3125rem;
+  padding: 0.5rem;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  border: 1px solid #0f69af;
+  background-color: #0f69af !important;
+
+  .dx-button-text {
+    color: #fff;
+    font-family: Lato;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: unset !important;
+  }
+}
+
 .dx-toolbar:last-child {
   display: none !important;
+}
+
+.delete-popup {
+  .dx-popup-title {
+    color: #000;
+    font-family: "Open Sans";
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 }
