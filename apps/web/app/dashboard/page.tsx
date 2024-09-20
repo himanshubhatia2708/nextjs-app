@@ -13,7 +13,7 @@ export default function Dashboard() {
         <div className={styles.page}>
             <main className={styles.main}>
                 <div>
-                    Profile page
+                    Dashboard page
                 </div>
             </main>
         </div>

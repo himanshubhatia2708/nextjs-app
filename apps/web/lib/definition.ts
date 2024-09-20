@@ -12,3 +12,19 @@ export const LoginFormSchema = z.object({
         })
         .trim(), */
 })
+
+export interface BreadCrumbsObj {
+    label: string;
+    href: string;
+    svgPath: string;
+    svgWidth: number;
+    svgHeight: number;
+    isActive?: boolean;
+}
+
+export interface DropDownItem {
+    label: string,
+    value: string,
+    link?: string,
+    trigger?: string;
+}

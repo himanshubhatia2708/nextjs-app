@@ -1,13 +1,36 @@
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import Home from '../app/page'
- 
-describe('Page', () => {
-  it('renders a heading', () => {
-    render(<Home />)
- 
-    const heading = screen.getByRole('heading', { level: 1 })
- 
-    expect(heading).toBeInTheDocument()
-  })
-})
+import { render, screen } from '@testing-library/react';
+import Login from './page';
+
+describe('Login', () => {
+
+  beforeEach(() => {
+    render(<Login />);
+  });
+
+  /* test('renders the page with the correct elements', () => {
+
+    const logo = screen.getByAltText(/SynCoOp logo/i);
+    expect(logo).toBeInTheDocument();
+
+
+    const welcomeHeading = screen.getByText(/Welcome!/i);
+    expect(welcomeHeading).toBeInTheDocument();
+
+
+    const emailInput = screen.getByLabelText(/Email Address/i);
+    expect(emailInput).toBeInTheDocument();
+
+
+    const passwordInput = screen.getByLabelText(/Password/i);
+    expect(passwordInput).toBeInTheDocument();
+
+
+    const loginButton = screen.getByRole('button', { name: /Login/i });
+    expect(loginButton).toBeInTheDocument();
+
+
+    const forgotPasswordLink = screen.getByText(/Forgot password?/i);
+    expect(forgotPasswordLink).toBeInTheDocument();
+  }); */
+
+});

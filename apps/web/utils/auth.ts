@@ -3,6 +3,8 @@
 import { cookies } from "next/headers";
 import { validateAuth } from "./helpers";
 import Cryptr from "cryptr";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function authorize(formData: FormData) {
     try {
@@ -43,4 +45,9 @@ export async function authorize(formData: FormData) {
     catch (error: any) {
         return error;
     }
+}
+
+export async function clearSession() {
+    cookies().delete('session');
+    return cookies().has("session");
 }

@@ -1,107 +1,108 @@
+'use client';
+
+import { authorize } from "@/utils/auth";
 import Image from "next/image";
-import styles from "./page.module.css";
-import { Button } from "@/ui/button";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+import styles from './page.module.css';
 import Link from "next/link";
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <h1>Home</h1>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+export default function Login() {
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-          <Link
-            href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Log in</span>
-          </Link>
+  const router = useRouter();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const isValidated = await authorize(formData);
+    if (isValidated) {
+      if (Object(isValidated).hasOwnProperty('errors')) {
+        console.log("Error");
+      } else {
+        router.push('/dashboard');
+      }
+    } else {
+      console.log("False");
+    }
+    return false;
+  }
+
+  return (
+    <div className="flex h-screen bg-[url('/images/login-background.jpg')] bg-cover bg-center justify-center items-center">
+      <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-16 lg:space-y-0 lg:space-x-16 justify-between w-4/5">
+        <div className="flex-shrink-0 w-[213px] h-[126.4px] overflow-hidden">
+          <Image
+            src="/icons/aidd-login-icon.svg"
+            alt="SynCoOp logo"
+            priority
+            width={213}
+            height={126.4}
+            className='w-full h-full object-contain'
+          />
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file-text.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="flex pr-10">
+          <form onSubmit={handleSubmit} className="flex flex-col w-[540px] h-[490px] p-[32px] gap-[10px] border-2 border-[#ECECF4] bg-white rounded-[8px]">
+            <div className="mb-6 flex flex-col gap-2">
+              <Image
+                src="/icons/M-icon.svg"
+                alt="Merck logo"
+                priority
+                width={64}
+                height={30}
+              />
+            </div>
+            <div className="mb-6 flex flex-col gap-2">
+              <h1 className={styles.customHeadline}>
+                Welcome!
+              </h1>
+            </div>
+            <div className="mb-6 flex flex-col gap-2">
+              <label htmlFor="email" className={styles.customEmailLabel}>Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div className="mb-6 flex flex-col gap-2">
+              <label htmlFor="password" className={styles.customEmailLabel}>Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+                placeholder="Enter your password"
+                required
+              />
+              <div className="w-96 h-5 justify-start items-start gap-1.5 inline-flex">
+                <div className="w-3.5 h-3.5 relative">
+                  <Image
+                    src="/icons/info-icon.svg"
+                    alt="!"
+                    priority
+                    width={14}
+                    height={15}
+                  />
+                </div>
+                <div className="grow shrink basis-0 self-stretch text-black text-sm font-bold font-['Lato'] leading-tight tracking-tight">
+                  <Link href={'/login'}>
+                    Forgot password?
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="mb-6 flex flex-col gap-2">
+              <button type="submit" className="w-24 h-10 p-3 bg-[#0f69af] rounded flex-col justify-center items-center inline-flex">
+                <div className="text-center text-white text-base font-bold font-['Lato'] leading-tight">
+                  Login
+                </div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  );
+  )
 }
