@@ -1,10 +1,23 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { Button } from "@/ui/button";
+import Breadcrumb from "./components/common/BreadCrumbs";
+type BreadCrumbsObj = {
+  label: string;
+  href: string;
+  svgPath: string;
+  svgWidth: number;
+  svgHeight: number;
+  isActive?: boolean;
+}
+const breadcrumbs: BreadCrumbsObj[] = [
+  { label: 'Home', svgPath: '/icons/home-icon.svg', svgWidth: 16, svgHeight: 16, href: '/' },
+  { label: 'Admin', svgPath: '/icons/admin-icon.svg', svgWidth: 16, svgHeight: 16, href: '/', isActive: true }
+]
 
 export default function Home() {
   return (
-    <div className={styles.page}>
+    <><Breadcrumb breadcrumbs={breadcrumbs} /><div className={styles.page}>
       <main className={styles.main}>
         <h1>Home</h1>
         <Image
@@ -13,8 +26,7 @@ export default function Home() {
           alt="Next.js logo"
           width={180}
           height={38}
-          priority
-        />
+          priority />
         <ol>
           <li>
             Get started by editing <code>app/page.tsx</code>
@@ -34,8 +46,7 @@ export default function Home() {
               src="/vercel.svg"
               alt="Vercel logomark"
               width={20}
-              height={20}
-            />
+              height={20} />
             Deploy now
           </a>
           <a
@@ -62,8 +73,7 @@ export default function Home() {
             src="/file-text.svg"
             alt="File icon"
             width={16}
-            height={16}
-          />
+            height={16} />
           Learn
         </a>
         <a
@@ -76,8 +86,7 @@ export default function Home() {
             src="/window.svg"
             alt="Window icon"
             width={16}
-            height={16}
-          />
+            height={16} />
           Examples
         </a>
         <a
@@ -90,11 +99,10 @@ export default function Home() {
             src="/globe.svg"
             alt="Globe icon"
             width={16}
-            height={16}
-          />
+            height={16} />
           Go to nextjs.org →
         </a>
       </footer>
-    </div>
+    </div></>
   );
 }
