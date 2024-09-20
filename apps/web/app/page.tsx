@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { Button } from "@/ui/button";
-import Breadcrumb from "./components/common/BreadCrumbs";
+import Breadcrumb from "@/components/common/BreadCrumbs";
 type BreadCrumbsObj = {
   label: string;
   href: string;
