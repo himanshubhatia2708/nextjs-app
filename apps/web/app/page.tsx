@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { Button } from "@/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -46,6 +47,12 @@ export default function Home() {
           >
             Read our docs
           </a>
+          <Link
+            href="/login"
+            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+          >
+            <span>Log in</span>
+          </Link>
         </div>
         <Button appName="web" className={styles.secondary}>
           Open alert

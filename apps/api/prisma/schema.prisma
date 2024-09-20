@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -7,24 +8,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
+model user {
   id        Int          @id @default(autoincrement())
   name      String?      @db.VarChar
-  email     String?      @db.VarChar
-  password  String?      @db.VarChar
+  email     String?      @unique @db.VarChar
+  password  String?      @db.VarChar  
+  user      user_role[]
+  organization  organization?
   status    status_type?
-  roleId    Int
-  roles     roles        @relation(fields: [roleId], references: [id])
   createdAt DateTime     @default(now()) @db.Timestamp(6)
   updatedAt DateTime     @default(now()) @db.Timestamp(6)
 }
 
-model roles {
+model user_role {
   id        Int      @id @default(autoincrement())
+  userId    Int
+  user      user     @relation(fields: [userId], references: [id])
+  roleId    Int
+  role      role     @relation(fields: [roleId], references: [id])
+}
+
+model role {
+  id        Int          @id @default(autoincrement())
   type      String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
-  users     users[]
+  user      user_role[]
+  status    status_type?
+  createdAt DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt DateTime     @default(now()) @db.Timestamp(6)
+}
+
+model organization {
+  id        Int          @id @default(autoincrement())
+  name      String
+  userId    Int          @unique
+  user      user         @relation(fields: [userId], references: [id])
+  timezone  String
+  status    status_type?
+  createdAt DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt DateTime     @default(now()) @db.Timestamp(6)
+  
 }
 
 enum status_type {
