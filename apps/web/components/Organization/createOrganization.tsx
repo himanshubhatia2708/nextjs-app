@@ -16,30 +16,33 @@ import {
 } from "devextreme-react/form";
 import { getTimeZones } from "devextreme/time_zone_utils";
 import Textbox from "devextreme-react/text-box";
+import { createOrganization } from "@/components/Organization/service";
 
 export const RenderCreateOrganization = () => {
   const formRef = useRef<FormRef>(null);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const values = formRef.current!.instance().option("formData");
-    console.log(values);
+    const response = await createOrganization(values);
+    console.log("response", response);
   };
 
   const timeZones = getTimeZones(new Date());
+
   return (
     <CreateForm ref={formRef}>
-      <SimpleItem dataField="organizationName">
+      <SimpleItem dataField="name">
         <RequiredRule message="Organization name is required" />
       </SimpleItem>
-      <SimpleItem dataField="organizationAdminFirstName" />
-      <SimpleItem dataField="organizationAdminLastName" />
-      <SimpleItem dataField="organizationAdminEmailAddress">
+      <SimpleItem dataField="firstName" />
+      <SimpleItem dataField="lastName" />
+      <SimpleItem dataField="email">
         <RequiredRule message="Email is required" />
         <EmailRule message="Invalid Email Address" />
       </SimpleItem>
-      <SimpleItem dataField="Number & Date Time format" />
+      {/* <SimpleItem dataField="Number & Date Time format" /> */}
       <SimpleItem
-        dataField="timeZone"
+        dataField="timezone"
         editorType="dxSelectBox"
         editorOptions={{
           dataSource: timeZones,

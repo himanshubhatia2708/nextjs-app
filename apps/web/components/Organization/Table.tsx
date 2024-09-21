@@ -19,9 +19,12 @@ import { Button as Btn } from "devextreme-react/button";
 import { getTimeZones } from "devextreme/time_zone_utils";
 import RadioGroup from "devextreme-react/radio-group";
 import "./table.css";
-// import { data } from "../../data/organization";
 import Toolbar, { Item as ToolbarItem } from "devextreme-react/toolbar";
 import styles from "./table.module.css";
+import {
+  editOrganization,
+  // deleteOrganization,
+} from "@/components/Organization/service";
 
 type EditFieldType = {
   dataField: string;
@@ -37,9 +40,16 @@ interface TableFields {
   editFields: EditFieldType[];
 }
 
+interface DataFields {
+  name: string;
+  email: string;
+  status: string;
+}
+
 interface TableProps {
   tableFields: TableFields;
   renderCreateOrganization: React.FC;
+  data: DataFields;
 }
 
 const Table: React.FC<TableProps> = ({
@@ -49,13 +59,18 @@ const Table: React.FC<TableProps> = ({
 }) => {
   const timeZones = getTimeZones(new Date());
   const [deletePopup, showDeletePopup] = useState(-1);
-  const [deleteVal] = useState({ delete: "" });
+  const [deleteVal, setDelete] = useState({ delete: "" });
   const [createPopupVisible, setCreatePopupVisibility] = useState(false);
 
   const formFieldDataChanged = (e) => {
-    console.log("qwqw1");
-    console.log("qwqw", e.component.option("formData"));
-    // setDelete({ delete: "" });
+    // console.log("qwqw", e.component.option("formData"));
+    console.log("qw", e);
+    setDelete({ delete: e.value });
+  };
+
+  const deleteOrganizationData = async () => {
+    // await deleteOrganization(id);
+    window.location.reload();
   };
 
   const renderContent = () => {
@@ -65,12 +80,8 @@ const Table: React.FC<TableProps> = ({
         <CreateForm
           elementAttr={{ class: "mb-1 mt-2" }}
           onFieldDataChanged={formFieldDataChanged}
-          // formData={deleteVal.delete}
         >
           <SimpleItem dataField="" editorType="dxTextBox" />
-          {/* <SimpleItem dataField="" render={renderDelete}>
-            <Required message="Type 'delete' to proceed" />
-          </SimpleItem> */}
         </CreateForm>
         <Btn
           text="Delete"
@@ -81,7 +92,7 @@ const Table: React.FC<TableProps> = ({
         <Btn
           text="Cancel"
           elementAttr={{ class: "btn_secondary" }}
-          onClick={() => showDeletePopup(-1)}
+          onClick={() => deleteOrganizationData()}
         />
       </>
     );
@@ -92,12 +103,11 @@ const Table: React.FC<TableProps> = ({
   const saveOptions = useMemo(() => {
     return {
       text: "Save",
-      onClick: () => {
+      onClick: async () => {
         const gridInstance = grid.current!.instance;
         const values = gridInstance().option("editing.editRowKey");
-        console.log(values);
-
-        // grid.current!.instance().saveEditData();
+        await editOrganization(values);
+        window.location.reload();
       },
     };
   }, []);
@@ -116,9 +126,7 @@ const Table: React.FC<TableProps> = ({
         const gridInstance = grid.current!.instance;
         const rowKey = gridInstance().option("editing.editRowKey");
         const rowIndex = gridInstance().getRowIndexByKey(rowKey);
-        console.log(rowIndex);
         showDeletePopup(rowIndex);
-        // grid.current!.instance().deleteRow(rowIndex);
       },
     };
   }, []);
@@ -164,7 +172,7 @@ const Table: React.FC<TableProps> = ({
         >
           <Popup
             showTitle={true}
-            title={`Edit ${grid.current?.instance().option("editing.editRowKey").organizationName}`}
+            title={`Edit ${grid.current?.instance()?.option("editing.editRowKey")?.organizationName}`}
             width={400}
             height="100%"
             position={{ my: "top right", at: "top right", of: window }}

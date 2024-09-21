@@ -6,7 +6,7 @@ import { isAuthenticated } from "@/utils/auth";
 
 import styles from "./page.module.css";
 import { tableFields } from "@/utils/constants";
-import { renderCreateOrganization } from "@/components/Organization/createOrganization";
+import { RenderCreateOrganization } from "@/components/Organization/createOrganization";
 import { getOrganization } from "@/components/Organization/service";
 
 export default async function Organization() {
@@ -16,7 +16,6 @@ export default async function Organization() {
   }
 
   const response = await getOrganization();
-  console.log("qwqw", response);
 
   return (
     <div className={styles.page}>
@@ -31,7 +30,7 @@ export default async function Organization() {
       </div>
       <Table
         tableFields={tableFields}
-        renderCreateOrganization={renderCreateOrganization}
+        renderCreateOrganization={RenderCreateOrganization}
         data={response}
       />
     </div>
