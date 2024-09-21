@@ -1,0 +1,15 @@
+.button_primary {
+  background: #ecf5fc !important;
+  color: #50a0de !important;
+  font-family: Lato;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: unset !important;
+}
+
+.search {
+  background: #c7c7d1;
+  border: 1px solid #c7c7d1;
+}
