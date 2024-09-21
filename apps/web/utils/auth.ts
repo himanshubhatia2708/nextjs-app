@@ -48,6 +48,13 @@ export async function authorize(formData: FormData) {
 }
 
 export async function clearSession() {
-    cookies().delete('session');
-    return cookies().has("session");
+    if(cookies().has("session")) {
+        cookies().delete('session');
+        return true;
+    }
+    return false;
+}
+
+export async function isAuthenticated() {
+    return cookies().has('session');
 }

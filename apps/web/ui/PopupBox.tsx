@@ -9,8 +9,8 @@ type PopupBoxProps = {
 export function PopupBox({ isOpen, onItemSelected, items }: PopupBoxProps) {
     return (
         isOpen && (
-            <div id="custom-dropdown"
-                className="absolute right-0 mt-2 w-auto min-w-48 bg-white shadow-[0px_0px_24px_0px_rgba(0,0,0,0.25)] rounded-md">
+            <div id="custom-dropdown" 
+            className="absolute right-0 mt-2 w-auto min-w-48 bg-white shadow-[0px_0px_24px_0px_rgba(0,0,0,0.25)] rounded-md">
                 <ul className="py-2">
                     {items.map((item) => (
                         <li

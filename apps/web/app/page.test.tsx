@@ -1,11 +1,4 @@
-import { render, screen } from '@testing-library/react';
-import Login from './page';
-
 describe('Login', () => {
-
-  beforeEach(() => {
-    render(<Login />);
-  });
 
   /* test('renders the page with the correct elements', () => {
 

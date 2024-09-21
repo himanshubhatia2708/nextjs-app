@@ -14,7 +14,7 @@ const Breadcrumb: React.FC<BreadCrumbsObj[]> = (breadcrumbs) => {
                     className="ml-1 flex items-center text-[#8B8B9C] font-lato font-normal text-[14px] leading-[20px] text-center">
                     <Image
                         src={item.svgPath}
-                        iconName={item.label}
+                        alt={item.label}
                         width={item.svgWidth}
                         height={item.svgHeight}
                     />

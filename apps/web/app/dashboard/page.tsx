@@ -1,14 +1,15 @@
 import styles from "./page.module.css";
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
+import { isAuthenticated } from "@/utils/auth";
 
-export default function Dashboard() {
-    const isAuthenticated = cookies().get('session');
-    if (!isAuthenticated) {
+export default async function Dashboard() {
+
+    if (!await isAuthenticated()) {
         revalidatePath('/');
-        redirect('/');
+        redirect("/")
     }
+
     return (
         <div className={styles.page}>
             <main className={styles.main}>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render/* , fireEvent, screen */ } from '@testing-library/react';
 import Header from './Header';
 
 
 
 describe('Header Component', () => {
-    const dynamicInitials = '12';
-    const userInitials = 'A';
+    /* const dynamicInitials = '12';
+    const userInitials = 'A'; */
 
     beforeEach(() => {
         render(<Header />);
