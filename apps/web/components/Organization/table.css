@@ -22,7 +22,11 @@
   }
 }
 
-input {
+.dx-datagrid-header-panel {
+  padding: 0;
+}
+
+.dx-texteditor-container {
   background-color: #fff !important;
   border: 1px solid #c7c7d1 !important;
   color: #c7c7d1 !important;
@@ -150,17 +154,39 @@ input {
   }
 }
 
-.dx-toolbar:last-child {
-  display: none !important;
+.btn_primary.dx-state-disabled {
+  border: 1px solid #c7c7d1 !important;
+  background-color: #fff !important;
+
+  .dx-button-text {
+    color: #e1e1ea !important;
+    font-weight: 400;
+  }
+}
+
+.edit-popup {
+  z-index: 100 !important;
+  .dx-toolbar:last-child {
+    display: none !important;
+  }
+  .dx-popup-content {
+    padding: 0;
+  }
 }
 
 .delete-popup {
   .dx-popup-title {
     color: #000;
-    font-family: "Open Sans";
+    font-family: var(--open-sans);
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+}
+
+.textarea-custom {
+  .dx-texteditor-input {
+    overflow: hidden;
   }
 }

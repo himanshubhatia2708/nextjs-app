@@ -1,4 +1,4 @@
-const status = ["Enabled", "Disabled"];
+export const status = ["Enabled", "Disabled"];
 
 export const tableFields = {
   columns: [
