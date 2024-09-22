@@ -8,19 +8,23 @@ import DataGrid, {
   Popup,
   Button,
   RequiredRule,
+  SearchPanel,
+  Toolbar as GridToolbar,
+  DataGridRef,
 } from "devextreme-react/data-grid";
-import { Popup as MainPopup } from "devextreme-react/popup";
-import {
-  Form as CreateForm,
-  RequiredRule as Required,
-  SimpleItem,
-} from "devextreme-react/form";
+import Image from "next/image";
+import { Popup as MainPopup, PopupRef } from "devextreme-react/popup";
+import { Form as DeleteForm, SimpleItem } from "devextreme-react/form";
 import { Button as Btn } from "devextreme-react/button";
 import { getTimeZones } from "devextreme/time_zone_utils";
 import RadioGroup from "devextreme-react/radio-group";
 import "./table.css";
-import { data } from "../../data/organization";
 import Toolbar, { Item as ToolbarItem } from "devextreme-react/toolbar";
+import styles from "./table.module.css";
+import {
+  editOrganization,
+  deleteOrganization,
+} from "@/components/Organization/service";
 
 type EditFieldType = {
   dataField: string;
@@ -36,44 +40,76 @@ interface TableFields {
   editFields: EditFieldType[];
 }
 
-interface TableProps {
-  tableFields: TableFields;
+interface DataFields {
+  name: string;
+  email: string;
+  status: string;
 }
 
-const Table: React.FC<TableProps> = ({ tableFields }) => {
+interface TableProps {
+  tableFields: TableFields;
+  renderCreateOrganization: React.FC;
+  data: DataFields;
+}
+
+const Table: React.FC<TableProps> = ({
+  tableFields,
+  renderCreateOrganization,
+  data,
+}) => {
   const timeZones = getTimeZones(new Date());
   const [deletePopup, showDeletePopup] = useState(-1);
+  const [deleteVal, setDelete] = useState({ delete: "" });
+  const [createPopupVisible, setCreatePopupVisibility] = useState(false);
+
+  const formFieldDataChanged = (e: any) => {
+    setDelete({ delete: e.value });
+  };
+
+  const deleteOrganizationData = async () => {
+    await deleteOrganization(deletePopup);
+    window.location.reload();
+  };
 
   const renderContent = () => {
     return (
       <>
         <p>Type ‘delete’ in the field below</p>
-        <CreateForm elementAttr={{ class: "mb-1 mt-2" }}>
-          <SimpleItem dataField="">
-            <Required message="Type 'delete' to proceed" />
-          </SimpleItem>
-        </CreateForm>
+        <DeleteForm onFieldDataChanged={formFieldDataChanged}>
+          <SimpleItem
+            dataField="."
+            editorOptions={{
+              placeholder: "Enter delete",
+              // cssClass="text-transparent"
+            }}
+          />
+        </DeleteForm>
         <Btn
           text="Delete"
-          onClick={() => showDeletePopup(-1)}
+          onClick={() => deleteOrganizationData()}
           elementAttr={{ class: "btn_primary" }}
-          // disabled={}
+          disabled={deleteVal.delete !== "delete"}
         />
         <Btn
           text="Cancel"
+          onClick={() => showDeletePopup(-1)}
           elementAttr={{ class: "btn_secondary" }}
-          // onClick={togglePopup}
         />
       </>
     );
   };
 
-  const grid = useRef<DataGrid>(null);
+  const grid = useRef<DataGridRef>(null);
+  const deleteRef = useRef<PopupRef>(null);
+
   const saveOptions = useMemo(() => {
     return {
       text: "Save",
-      onClick: () => {
-        grid.current!.instance().saveEditData();
+      onClick: async () => {
+        const gridInstance = grid.current!.instance;
+        const values = gridInstance().option("editing.editRowKey");
+        await editOrganization(values);
+        window.location.reload();
       },
     };
   }, []);
@@ -92,9 +128,7 @@ const Table: React.FC<TableProps> = ({ tableFields }) => {
         const gridInstance = grid.current!.instance;
         const rowKey = gridInstance().option("editing.editRowKey");
         const rowIndex = gridInstance().getRowIndexByKey(rowKey);
-        console.log(rowIndex);
         showDeletePopup(rowIndex);
-        // grid.current!.instance().deleteRow(rowIndex);
       },
     };
   }, []);
@@ -124,6 +158,12 @@ const Table: React.FC<TableProps> = ({ tableFields }) => {
     );
   }, [saveOptions, cancelOptions, deleteOptions]);
 
+  const renderTitle = () => {
+    const gridInstance = grid.current!.instance;
+    const rowKey = gridInstance().option("editing.editRowKey");
+    return <p className={styles.edit_title}>{`Edit ${rowKey?.name}`}</p>;
+  };
+
   return (
     <>
       <DataGrid
@@ -139,19 +179,30 @@ const Table: React.FC<TableProps> = ({ tableFields }) => {
           allowUpdating={tableFields.editable}
         >
           <Popup
+            titleRender={renderTitle}
             showTitle={true}
-            title="Edit Organization"
+            // title={`Edit ${grid.current?.instance()?.option("editing.editRowKey")?.name}`}
             width={400}
             height="100%"
             position={{ my: "top right", at: "top right", of: window }}
             showCloseButton={true}
+            wrapperAttr={{ class: "edit-popup" }}
           />
           <Form>
             {tableFields.editFields.map(
               ({ type, dataField, items, required }) =>
                 type !== "dxSelectBox" ? (
                   <Item dataField={dataField} key={dataField}>
-                    {type === "radio" && <RadioGroup items={items} />}
+                    {type === "radio" && (
+                      <RadioGroup
+                        items={items}
+                        // defaultValue={
+                        //   grid.current
+                        //     ?.instance()
+                        //     ?.option("editing.editRowKey")?.[dataField]
+                        // }
+                      />
+                    )}
                     {required && <RequiredRule message={required} />}
                   </Item>
                 ) : (
@@ -175,11 +226,63 @@ const Table: React.FC<TableProps> = ({ tableFields }) => {
         <Column type="buttons" caption="Actions">
           <Button icon="edit" />
         </Column>
+        <GridToolbar>
+          <Item location="after">
+            <Btn
+              text="Create Organization"
+              icon="plus"
+              className={`${styles.button_primary} mr-2.5`}
+              render={(buttonData) => (
+                <>
+                  <Image
+                    src="/icons/plus.svg"
+                    width={20}
+                    height={20}
+                    alt="Picture of the author"
+                  />
+                  <span className="pl-2">{buttonData.text}</span>
+                </>
+              )}
+              onClick={() => setCreatePopupVisibility(true)}
+            />
+            <MainPopup
+              title="Create Organization"
+              visible={createPopupVisible}
+              contentRender={renderCreateOrganization}
+              width={400}
+              height="100%"
+              position={{ my: "top right", at: "top right", of: window }}
+              onHiding={() => setCreatePopupVisibility(false)}
+              showCloseButton={true}
+            />
+          </Item>
+          <Item location="after">
+            <Btn
+              text="Filter"
+              icon="filter"
+              className={styles.button_primary}
+              render={() => (
+                <>
+                  <Image
+                    src="/icons/filter.svg"
+                    width={20}
+                    height={20}
+                    alt="Picture of the author"
+                  />
+                  <span className="pl-2">Filter</span>
+                </>
+              )}
+            />
+          </Item>
+          <Item name="searchPanel" />
+        </GridToolbar>
+        <SearchPanel visible={true} highlightCaseSensitive={true} />
       </DataGrid>
       <MainPopup
         title="Are you sure, you want to delete Fauxbio?"
         wrapperAttr={{ class: "delete-popup" }}
         visible={deletePopup !== -1}
+        ref={deleteRef}
         width="auto"
         height="auto"
         onHiding={() => showDeletePopup(-1)}

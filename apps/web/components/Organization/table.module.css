@@ -13,3 +13,12 @@
   background: #c7c7d1;
   border: 1px solid #c7c7d1;
 }
+
+.edit_title {
+  color: #0a3b61;
+  font-family: Lato;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.625rem;
+}

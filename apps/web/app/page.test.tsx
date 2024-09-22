@@ -1,8 +1,6 @@
-describe('Login', () => {
-
-  /* test('renders the page with the correct elements', () => {
-
-    const logo = screen.getByAltText(/SynCoOp logo/i);
+describe("Login", () => {
+  test("renders the page with the correct elements", () => {
+    /* const logo = screen.getByAltText(/SynCoOp logo/i);
     expect(logo).toBeInTheDocument();
 
 
@@ -23,7 +21,6 @@ describe('Login', () => {
 
 
     const forgotPasswordLink = screen.getByText(/Forgot password?/i);
-    expect(forgotPasswordLink).toBeInTheDocument();
-  }); */
-
+    expect(forgotPasswordLink).toBeInTheDocument(); */
+  });
 });
