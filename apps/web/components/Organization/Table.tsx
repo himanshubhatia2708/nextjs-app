@@ -13,8 +13,8 @@ import DataGrid, {
   DataGridRef,
 } from "devextreme-react/data-grid";
 import Image from "next/image";
-import { Popup as MainPopup } from "devextreme-react/popup";
-import { Form as CreateForm, SimpleItem } from "devextreme-react/form";
+import { Popup as MainPopup, PopupRef } from "devextreme-react/popup";
+import { Form as DeleteForm, SimpleItem } from "devextreme-react/form";
 import { Button as Btn } from "devextreme-react/button";
 import { getTimeZones } from "devextreme/time_zone_utils";
 import RadioGroup from "devextreme-react/radio-group";
@@ -23,7 +23,7 @@ import Toolbar, { Item as ToolbarItem } from "devextreme-react/toolbar";
 import styles from "./table.module.css";
 import {
   editOrganization,
-  // deleteOrganization,
+  deleteOrganization,
 } from "@/components/Organization/service";
 
 type EditFieldType = {
@@ -62,14 +62,12 @@ const Table: React.FC<TableProps> = ({
   const [deleteVal, setDelete] = useState({ delete: "" });
   const [createPopupVisible, setCreatePopupVisibility] = useState(false);
 
-  const formFieldDataChanged = (e) => {
-    // console.log("qwqw", e.component.option("formData"));
-    console.log("qw", e);
+  const formFieldDataChanged = (e: any) => {
     setDelete({ delete: e.value });
   };
 
   const deleteOrganizationData = async () => {
-    // await deleteOrganization(id);
+    await deleteOrganization(deletePopup);
     window.location.reload();
   };
 
@@ -77,28 +75,32 @@ const Table: React.FC<TableProps> = ({
     return (
       <>
         <p>Type ‘delete’ in the field below</p>
-        <CreateForm
-          elementAttr={{ class: "mb-1 mt-2" }}
-          onFieldDataChanged={formFieldDataChanged}
-        >
-          <SimpleItem dataField="" editorType="dxTextBox" />
-        </CreateForm>
+        <DeleteForm onFieldDataChanged={formFieldDataChanged}>
+          <SimpleItem
+            dataField="."
+            editorOptions={{
+              placeholder: "Enter delete",
+              // cssClass="text-transparent"
+            }}
+          />
+        </DeleteForm>
         <Btn
           text="Delete"
-          onClick={() => showDeletePopup(-1)}
+          onClick={() => deleteOrganizationData()}
           elementAttr={{ class: "btn_primary" }}
           disabled={deleteVal.delete !== "delete"}
         />
         <Btn
           text="Cancel"
+          onClick={() => showDeletePopup(-1)}
           elementAttr={{ class: "btn_secondary" }}
-          onClick={() => deleteOrganizationData()}
         />
       </>
     );
   };
 
   const grid = useRef<DataGridRef>(null);
+  const deleteRef = useRef<PopupRef>(null);
 
   const saveOptions = useMemo(() => {
     return {
@@ -156,6 +158,12 @@ const Table: React.FC<TableProps> = ({
     );
   }, [saveOptions, cancelOptions, deleteOptions]);
 
+  const renderTitle = () => {
+    const gridInstance = grid.current!.instance;
+    const rowKey = gridInstance().option("editing.editRowKey");
+    return <p className={styles.edit_title}>{`Edit ${rowKey?.name}`}</p>;
+  };
+
   return (
     <>
       <DataGrid
@@ -171,8 +179,9 @@ const Table: React.FC<TableProps> = ({
           allowUpdating={tableFields.editable}
         >
           <Popup
+            titleRender={renderTitle}
             showTitle={true}
-            title={`Edit ${grid.current?.instance()?.option("editing.editRowKey")?.organizationName}`}
+            // title={`Edit ${grid.current?.instance()?.option("editing.editRowKey")?.name}`}
             width={400}
             height="100%"
             position={{ my: "top right", at: "top right", of: window }}
@@ -184,7 +193,16 @@ const Table: React.FC<TableProps> = ({
               ({ type, dataField, items, required }) =>
                 type !== "dxSelectBox" ? (
                   <Item dataField={dataField} key={dataField}>
-                    {type === "radio" && <RadioGroup items={items} />}
+                    {type === "radio" && (
+                      <RadioGroup
+                        items={items}
+                        // defaultValue={
+                        //   grid.current
+                        //     ?.instance()
+                        //     ?.option("editing.editRowKey")?.[dataField]
+                        // }
+                      />
+                    )}
                     {required && <RequiredRule message={required} />}
                   </Item>
                 ) : (
@@ -264,6 +282,7 @@ const Table: React.FC<TableProps> = ({
         title="Are you sure, you want to delete Fauxbio?"
         wrapperAttr={{ class: "delete-popup" }}
         visible={deletePopup !== -1}
+        ref={deleteRef}
         width="auto"
         height="auto"
         onHiding={() => showDeletePopup(-1)}

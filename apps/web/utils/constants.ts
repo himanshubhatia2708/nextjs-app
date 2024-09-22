@@ -19,7 +19,7 @@ export const tableFields = {
       required: "Organization name is required",
     },
     { type: "radio", dataField: "status", items: status },
-    { dataField: "numberAndDateTimeFormat" },
+    // { dataField: "numberAndDateTimeFormat" },
     { type: "dxSelectBox", dataField: "timezone" },
     { dataField: "primaryContact" },
   ],

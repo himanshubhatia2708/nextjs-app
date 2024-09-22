@@ -6,7 +6,6 @@ export async function getOrganization() {
       "Content-Type": "application/json",
     },
   });
-  console.log("qwww", response);
   const data = await response.json();
   return data;
 }
