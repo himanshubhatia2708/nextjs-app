@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "status_type" AS ENUM ('0', '1');
+CREATE TYPE "status_type" AS ENUM ('0', '1', '2');
 
 -- CreateTable
 CREATE TABLE "user" (

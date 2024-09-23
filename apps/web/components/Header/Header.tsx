@@ -33,7 +33,6 @@ export default function Header() {
     };
 
     const onItemSelected = async (value: string) => {
-        alert(value);
         if (value === 'Logout') {
             if (await clearSession()) {
                 router.push('/')

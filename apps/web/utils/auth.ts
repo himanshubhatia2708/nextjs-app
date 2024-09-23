@@ -3,8 +3,6 @@
 import { cookies } from "next/headers";
 import { validateAuth } from "./helpers";
 import Cryptr from "cryptr";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function authorize(formData: FormData) {
     try {

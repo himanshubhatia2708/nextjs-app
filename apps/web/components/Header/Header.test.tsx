@@ -1,20 +1,19 @@
-import React from 'react';
-import { render/* , fireEvent, screen */ } from '@testing-library/react';
-import Header from './Header';
+import { render, screen } from "@testing-library/react";
+import Header from "./Header";
 
-
+// Mock useRouter:
+jest.mock("next/navigation", () => ({
+    useRouter() {
+        return {
+            prefetch: () => null,
+            push: () => null
+        };
+    }
+}));
 
 describe('Header Component', () => {
-    /* const dynamicInitials = '12';
-    const userInitials = 'A'; */
-
     beforeEach(() => {
         render(<Header />);
-    });
-
-    /* test('renders the header', () => {
-        const headerElement = screen.getByRole('banner');
-        expect(headerElement).toBeInTheDocument();
     });
 
     test('renders the logo image', () => {
@@ -22,36 +21,4 @@ describe('Header Component', () => {
         expect(logoImage).toBeInTheDocument();
         expect(logoImage).toHaveAttribute('src', '/icons/aidd-icon-shell.svg');
     });
-
-    test('renders the help button', () => {
-        const helpButton = screen.getByRole('img', { name: 'help' });
-        expect(helpButton).toBeInTheDocument();
-    });
-
-    test('renders the bell button', () => {
-        const bellButton = screen.getByRole('img', { name: 'bell' });
-        expect(bellButton).toBeInTheDocument();
-    });
-
-    test('renders the preferences button', () => {
-        const preferencesButton = screen.getByRole('img', { name: 'preferences' });
-        expect(preferencesButton).toBeInTheDocument();
-    });
-
-    test('renders the DynamicSvg with initials', () => {
-        const dynamicSvg = screen.getByText(dynamicInitials);
-        expect(dynamicSvg).toBeInTheDocument();
-    });
-
-    test('renders the UserIcon with initials', () => {
-        const userIcon = screen.getByText(userInitials);
-        expect(userIcon).toBeInTheDocument();
-    });
-
-    test('UserIcon is clickable', () => {
-        const userIcon = screen.getByText(userInitials);
-        
-        fireEvent.click(userIcon);
-        
-    }); */
 });
