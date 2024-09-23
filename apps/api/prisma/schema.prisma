@@ -49,6 +49,7 @@ model organization {
 }
  
 enum status_type {
-  Disabled @map("0")
-  Enabled @map("1")
+  Disable @map("0")
+  Enable  @map("1")
+  Delete  @map("2")
 }
