@@ -24,8 +24,10 @@ export async function authorize(formData: FormData) {
                 },
                 body
             });
+
             if (response.status === 200) {
-                const sessionData = body;
+                const output = await response.json();
+                const sessionData = output;
                 const encryptedSessionData =
                     new Cryptr(`${process.env.AUTH_SECRET}`).encrypt(sessionData);
                 const cookie = cookies();
@@ -35,9 +37,12 @@ export async function authorize(formData: FormData) {
                     maxAge: 60 * 60 * 24 * 7, // One week
                     path: '/',
                 });
-                return cookie.has('session');
+                return output;
+            } else if (response.status === 404) {
+                const output = await response.json();
+                return output;
             }
-            throw new Error();
+            throw new Error("Something went wrong");
         }
     }
     catch (error: any) {
@@ -46,7 +51,7 @@ export async function authorize(formData: FormData) {
 }
 
 export async function clearSession() {
-    if(cookies().has("session")) {
+    if (cookies().has("session")) {
         cookies().delete('session');
         return true;
     }

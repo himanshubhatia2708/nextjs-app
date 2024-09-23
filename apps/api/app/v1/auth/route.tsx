@@ -3,15 +3,19 @@ import prisma from "@/lib/prisma";
 export async function POST(request: Request) {
     try {
         const req = await request.json();
-        const user = await prisma.user.findUnique({
+        const user = await prisma.user.findFirst({
             /* relationLoadStrategy: 'join', // or 'query' */
-            /* include: {
+            include: {
                 user_role: {
                     select: {
-                        roleId: true
+                        role: {
+                            select: {
+                                type: true
+                            }
+                        }
                     }
                 },
-            }, */
+            },
             where: {
                 email: req.email,
                 password: req.password
@@ -25,10 +29,15 @@ export async function POST(request: Request) {
                 status: 200,
             });
         } else {
-            throw new Error("User does not exist");
+            return new Response(JSON.stringify({
+                success: false,
+                errorMessage: "User does not exist."
+            }), {
+                status: 404,
+            });
         }
     } catch (error: any) {
-        return new Response(`Webhook error: ${error.message}`, {
+        return new Response(`Webhook error: ${error?.message || error}`, {
             status: 400,
         })
     }

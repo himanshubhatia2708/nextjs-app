@@ -5,7 +5,6 @@ import { isAuthenticated } from "@/utils/auth";
 import Table from "@/components/Organization/Table";
 import Image from "next/image";
 import { tableFields } from "@/utils/constants";
-import RenderCreateOrganization from "@/components/Organization/createOrganization";
 import { getOrganization } from "@/components/Organization/service";
 
 export default async function Dashboard() {
@@ -19,6 +18,7 @@ export default async function Dashboard() {
 
     return (
         <div className={styles.page}>
+            
             <main className={styles.main}>
                 <Image
                     src="/icons/organization.svg"
@@ -31,7 +31,6 @@ export default async function Dashboard() {
             <div className={styles.table}>
                 <Table
                     tableFields={tableFields}
-                    renderCreateOrganization={RenderCreateOrganization}
                     data={response}
                 />
             </div>

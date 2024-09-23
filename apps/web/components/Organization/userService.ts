@@ -14,7 +14,6 @@ export async function createUser(formData: FormData) {
       const data = await response.json();
       return data;
     } else {
-      console.log("qw", response);
     }
   } catch (error: any) {
     console.log("err", error);

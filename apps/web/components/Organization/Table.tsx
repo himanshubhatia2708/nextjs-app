@@ -49,7 +49,7 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
     const rowKey = gridInstance().option("editing.editRowKey");
     return (
       <>
-        <div className="title">{`Are you sure, you want to delete ${rowKey?.name}?`}</div>
+        <div className="title">{`Are you sure, you want to delete ${(rowKey as any).name}?`}</div>
         <p>Type ‘delete’ in the field below</p>
         <DeleteForm onFieldDataChanged={formFieldDataChanged}>
           <SimpleItem
@@ -166,7 +166,7 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
               dataField={col}
               key={col}
               minWidth={350}
-              cellRender={({ data }) => <span>{data.user.email}</span>}
+              cellRender={({ data }: any) => <span>{data.user.email}</span>}
             />
           ) : col === "projects" || col === "molecules" || col === "users" ? (
             <Column
@@ -264,7 +264,7 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
               text="Create Organization"
               icon="plus"
               className={`${styles.button_primary}`}
-              render={(buttonData) => (
+              render={(buttonData: any) => (
                 <>
                   <Image
                     src="/icons/plus.svg"
