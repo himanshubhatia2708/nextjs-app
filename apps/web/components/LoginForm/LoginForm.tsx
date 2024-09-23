@@ -43,28 +43,28 @@ export default function LoginForm() {
                     />
                 </div>
                 <div className="mb-6 flex flex-col gap-2">
-                    <h1 className={styles.customHeadline}>
+                    <h1 className={styles.Headline}>
                         Welcome!
                     </h1>
                 </div>
                 <div className="mb-6 flex flex-col gap-2">
-                    <label htmlFor="email" className={styles.customEmailLabel}>Email Address</label>
+                    <label htmlFor="email" className={styles.label}>Email Address</label>
                     <input
                         type="email"
                         id="email"
                         name="email"
-                        className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+                        className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.EmailInput}`}
                         placeholder="Enter your email"
                         required
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="password" className={styles.customEmailLabel}>Password</label>
+                    <label htmlFor="password" className={styles.label}>Password</label>
                     <input
                         type="password"
                         id="password"
                         name="password"
-                        className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+                        className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.EmailInput}`}
                         placeholder="Enter your password"
                         required
                     />

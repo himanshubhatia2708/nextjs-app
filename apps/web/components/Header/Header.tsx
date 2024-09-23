@@ -38,11 +38,15 @@ export default function Header() {
                 router.push('/')
             }
         }
+
+        if (value === 'Profile') {
+            router.push('/profile');
+        }
         setDropdownOpen(false)
     }
 
     return (
-        <header className="relative top-0 left-0 w-full h-10 bg-themeBlueColor flex items-center justify-between px-4 shadow-sm">
+        <header className="top-0 left-0 w-full h-10 bg-themeBlueColor flex items-center justify-between px-4 shadow-sm">
             <div className="flex items-center">
                 <Link href="/">
                     <Image

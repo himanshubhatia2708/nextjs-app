@@ -1,4 +1,4 @@
-.page {
+/* .page {
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
@@ -21,4 +21,29 @@
   flex-direction: column;
   gap: 32px;
   grid-row-start: 2;
+} */
+.page {
+  margin-top: 40px;
+}
+
+.main {
+  display: inline-flex;
+  padding: 0px 0px 10px 20px;
+  align-items: center;
+  gap: 17px;
+  color: #0a3b61;
+  text-align: center;
+  font-family: Lato;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 42px;
+}
+
+.table {
+  background: #fcfcfc;
+  box-shadow:
+    0px 8px 12px 0px rgba(15, 26, 46, 0.15),
+    0px 0px 4px 0px rgba(15, 26, 46, 0.15);
+  padding: 20px;
 }

@@ -1,4 +1,5 @@
 import { DropDownItem } from "@/lib/definition";
+import styles from './popupBox.module.css';
 
 type PopupBoxProps = {
     isOpen: boolean;
@@ -9,12 +10,11 @@ type PopupBoxProps = {
 export function PopupBox({ isOpen, onItemSelected, items }: PopupBoxProps) {
     return (
         isOpen && (
-            <div id="custom-dropdown" 
-            className="absolute right-0 mt-2 w-auto min-w-48 bg-white shadow-[0px_0px_24px_0px_rgba(0,0,0,0.25)] rounded-md">
-                <ul className="py-2">
+            <div className="relative">
+                <ul className={styles.popupBox}>
                     {items.map((item) => (
                         <li
-                            className="px-4 py-2 text-center text-neutral-999 font-lato text-sm normal-case font-normal leading-normal hover:bg-gray-200 cursor-pointer"
+                            className="w-full px-4 py-2 text-center text-neutral-999 font-lato text-sm normal-case font-normal leading-normal hover:bg-gray-200 cursor-pointer"
                             onClick={() => onItemSelected(item.value)}
                             key={item.value}
                         >
