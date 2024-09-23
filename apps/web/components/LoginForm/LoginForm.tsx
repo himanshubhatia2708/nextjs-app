@@ -2,13 +2,13 @@
 
 import { authorize } from "@/utils/auth";
 import Image from "next/image"
-import { useRouter } from "next/navigation";
-import React from "react";
+import { useRouter } from "next/navigation"
+import React, { useState } from "react"
 import styles from "./LoginForm.module.css"
-import Link from "next/link";
+import { Messages } from "@/utils/message";
 
 export default function LoginForm() {
-
+    const [message, setMessage] = useState('');
     const router = useRouter();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -25,8 +25,13 @@ export default function LoginForm() {
         }
         return false;
     }
+
+    const handleForgotPassword = () => {
+        setMessage('Please request System Admin to re-generate your password');
+    };
+
     return (
-        <div className="flex pr-10">
+        <div>
             <form onSubmit={handleSubmit} className="flex flex-col w-[540px] h-[490px] p-[32px] gap-[10px] border-2 border-[#ECECF4] bg-white rounded-[8px]">
                 <div className="mb-6 flex flex-col gap-2">
                     <Image
@@ -53,7 +58,7 @@ export default function LoginForm() {
                         required
                     />
                 </div>
-                <div className="mb-6 flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
                     <label htmlFor="password" className={styles.customEmailLabel}>Password</label>
                     <input
                         type="password"
@@ -63,29 +68,22 @@ export default function LoginForm() {
                         placeholder="Enter your password"
                         required
                     />
-                    <div className="w-96 h-5 justify-start items-start gap-1.5 inline-flex">
-                        <div className="w-3.5 h-3.5 relative">
-                            <Image
-                                src="/icons/info-icon.svg"
-                                alt="!"
-                                priority
-                                width={14}
-                                height={15}
-                            />
-                        </div>
-                        <div className="grow shrink basis-0 self-stretch text-black text-sm font-bold font-['Lato'] leading-tight tracking-tight">
-                            <Link href={'/login'}>
-                                Forgot password?
-                            </Link>
-                        </div>
+                    <div className="flex gap-1.5">
+                        <Image
+                            src="/icons/info-icon.svg"
+                            alt="Forgot Password"
+                            priority
+                            width={14}
+                            height={15}
+                        />
+                        <span className="text-black text-sm font-bold leading-tight cursor-pointer" onClick={handleForgotPassword}>Forgot password?</span>
                     </div>
                 </div>
+                <div className={`mb-3 flex flex-col text-sm ${styles.errorMessage}`}>
+                    {message && Messages.forgotPassword}
+                </div>
                 <div className="mb-6 flex flex-col gap-2">
-                    <button type="submit" className="w-24 h-10 p-3 bg-[#0f69af] rounded flex-col justify-center items-center inline-flex">
-                        <div className="text-center text-white text-base font-bold font-['Lato'] leading-tight">
-                            Login
-                        </div>
-                    </button>
+                    <button type="submit" className="w-24 h-10 p-3 bg-[#0f69af] rounded justify-center items-center inline-flex text-white text-base font-bold font-['Lato'] leading-tight">Login</button>
                 </div>
             </form>
         </div>
