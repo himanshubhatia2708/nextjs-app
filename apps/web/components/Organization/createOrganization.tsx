@@ -11,14 +11,14 @@ import {
   EmailRule,
 } from "devextreme-react/form";
 import { getTimeZones } from "devextreme/time_zone_utils";
-import { createOrganization } from "./service";
+import { createOrganizationApi } from "./service";
 
 export default function RenderCreateOrganization() {
   const formRef = useRef<FormRef>(null);
 
   const handleSubmit = async () => {
     const values = formRef.current!.instance().option("formData");
-    const response = await createOrganization(values);
+    const response = await createOrganizationApi(values);
     console.log(response);
   };
 

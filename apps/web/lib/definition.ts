@@ -51,6 +51,5 @@ export interface OrganizationDataFields {
 
 export interface OrganizationTableProps {
   tableFields: OrganizationTableFields;
-  renderCreateOrganization: React.FC;
   data: OrganizationDataFields;
 }

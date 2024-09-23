@@ -273,3 +273,7 @@
   height: 24px;
   color: #0f69af;
 }
+
+.dx-button-mode-contained {
+  box-shadow: none;
+}

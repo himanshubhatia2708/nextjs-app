@@ -5,10 +5,10 @@ export const dynamic = "force-static";
 export async function GET() {
   try {
     const organizations = await prisma.organization.findMany({
-      relationLoadStrategy: 'join',
+      relationLoadStrategy: "join",
       include: {
-        user: true
-      }
+        user: true,
+      },
     } as any);
     return new Response(JSON.stringify(organizations), {
       headers: { "Content-Type": "application/json" },

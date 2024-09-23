@@ -1,13 +1,13 @@
 "use client";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import DataGrid, {
   Item,
   Column,
-  Editing,
-  Form,
-  Popup,
-  Button,
-  RequiredRule,
+  // Editing,
+  // Form,
+  // Popup,
+  // Button,
+  // RequiredRule,
   SearchPanel,
   Toolbar as GridToolbar,
   DataGridRef,
@@ -16,20 +16,21 @@ import Image from "next/image";
 import { Popup as MainPopup, PopupRef } from "devextreme-react/popup";
 import { Form as DeleteForm, SimpleItem } from "devextreme-react/form";
 import { Button as Btn } from "devextreme-react/button";
-import { getTimeZones } from "devextreme/time_zone_utils";
-import RadioGroup from "devextreme-react/radio-group";
+// import { getTimeZones } from "devextreme/time_zone_utils";
+// import RadioGroup from "devextreme-react/radio-group";
 import "./table.css";
-import Toolbar, { Item as ToolbarItem } from "devextreme-react/toolbar";
+// import Toolbar, { Item as ToolbarItem } from "devextreme-react/toolbar";
 import styles from "./table.module.css";
-import { editOrganization, deleteOrganization } from "./service";
+import { deleteOrganization } from "./service";
 import { OrganizationTableProps } from "@/lib/definition";
+// import { CustomPopup } from "@/ui/Popup";
+import RenderCreateOrganization from "./createOrganization";
+// import EditOrganization from "./editOrganization";
+// import CreateOrganizationForm from "./CreateOrganizationForm";
 
-export default function Table({
-  tableFields,
-  renderCreateOrganization,
-  data,
-}: OrganizationTableProps) {
-  const timeZones = getTimeZones(new Date());
+export default function Table({ tableFields, data }: OrganizationTableProps) {
+  // const timeZones = getTimeZones(new Date());
+  // const [editPopup, showEditPopup] = useState(false);
   const [deletePopup, showDeletePopup] = useState(-1);
   const [deleteVal, setDelete] = useState({ delete: "" });
   const [createPopupVisible, setCreatePopupVisibility] = useState(false);
@@ -77,84 +78,143 @@ export default function Table({
   const grid = useRef<DataGridRef>(null);
   const deleteRef = useRef<PopupRef>(null);
 
-  const saveOptions = useMemo(() => {
-    return {
-      text: "Save",
-      onClick: async () => {
-        const gridInstance = grid.current!.instance;
-        const values = gridInstance().option("editing.editRowKey");
-        await editOrganization(values);
-        window.location.reload();
-      },
-    };
-  }, []);
-  const cancelOptions = useMemo(() => {
-    return {
-      text: "Cancel",
-      onClick: () => {
-        grid.current!.instance().cancelEditData();
-      },
-    };
-  }, []);
-  const deleteOptions = useMemo(() => {
-    return {
-      text: "Delete",
-      onClick: () => {
-        const gridInstance = grid.current!.instance;
-        const rowKey = gridInstance().option("editing.editRowKey");
-        const rowIndex = gridInstance().getRowIndexByKey(rowKey);
-        showDeletePopup(rowIndex);
-      },
-    };
-  }, []);
+  // const saveOptions = useMemo(() => {
+  //   return {
+  //     text: "Save",
+  //     onClick: async () => {
+  //       const gridInstance = grid.current!.instance;
+  //       const values = gridInstance().option("editing.editRowKey");
+  //       await editOrganization(values);
+  //       window.location.reload();
+  //     },
+  //   };
+  // }, []);
+  // const cancelOptions = useMemo(() => {
+  //   return {
+  //     text: "Cancel",
+  //     onClick: () => {
+  //       grid.current!.instance().cancelEditData();
+  //     },
+  //   };
+  // }, []);
+  // const deleteOptions = useMemo(() => {
+  //   return {
+  //     text: "Delete",
+  //     onClick: () => {
+  //       const gridInstance = grid.current!.instance;
+  //       const rowKey = gridInstance().option("editing.editRowKey");
+  //       const rowIndex = gridInstance().getRowIndexByKey(rowKey);
+  //       showDeletePopup(rowIndex);
+  //     },
+  //   };
+  // }, []);
 
-  const formToolbar = useCallback(() => {
-    return (
-      <Toolbar>
-        <ToolbarItem
-          widget="dxButton"
-          location="before"
-          cssClass="btnform"
-          options={saveOptions}
-        ></ToolbarItem>
-        <ToolbarItem
-          widget="dxButton"
-          location="before"
-          cssClass="button_form_seconday"
-          options={cancelOptions}
-        ></ToolbarItem>
-        <ToolbarItem
-          widget="dxButton"
-          cssClass="btnform"
-          location="after"
-          options={deleteOptions}
-        ></ToolbarItem>
-      </Toolbar>
-    );
-  }, [saveOptions, cancelOptions, deleteOptions]);
+  // const formToolbar = useCallback(() => {
+  //   return (
+  //     <Toolbar>
+  //       <ToolbarItem
+  //         widget="dxButton"
+  //         location="before"
+  //         cssClass="btnform"
+  //         options={saveOptions}
+  //       ></ToolbarItem>
+  //       <ToolbarItem
+  //         widget="dxButton"
+  //         location="before"
+  //         cssClass="button_form_seconday"
+  //         options={cancelOptions}
+  //       ></ToolbarItem>
+  //       <ToolbarItem
+  //         widget="dxButton"
+  //         cssClass="btnform"
+  //         location="after"
+  //         options={deleteOptions}
+  //       ></ToolbarItem>
+  //     </Toolbar>
+  //   );
+  // }, [saveOptions, cancelOptions, deleteOptions]);
 
-  const renderTitle = () => {
-    const gridInstance = grid.current!.instance;
-    const rowKey = gridInstance().option("editing.editRowKey");
-    return <p className={styles.edit_title}>{`Edit ${rowKey?.name}`}</p>;
-  };
+  // const renderTitle = () => {
+  //   const gridInstance = grid.current!.instance;
+  //   const rowKey = gridInstance().option("editing.editRowKey");
+  //   return <p className={styles.edit_title}>{`Edit ${rowKey?.name}`}</p>;
+  // };
 
   return (
     <>
+      {/* {editPopup && (
+        <CustomPopup>
+          <EditOrganization />
+        </CustomPopup>
+      )}
+      {createPopupVisible && (
+        <CustomPopup>
+          <CreateOrganizationForm />
+        </CustomPopup>
+      )} */}
       <DataGrid
         dataSource={data}
-        defaultColumns={tableFields.columns}
+        // defaultColumns={tableFields.columns}
         showBorders={true}
         showColumnLines={true}
         ref={grid}
         elementAttr={{ class: styles.table }}
       >
-        <Editing
+        {tableFields.columns.map((col) =>
+          col === "organizationAdmin" ? (
+            <Column
+              dataField={col}
+              key={col}
+              minWidth={350}
+              cellRender={({ data }) => <span>{data.user.email}</span>}
+            />
+          ) : col === "projects" || col === "molecules" || col === "users" ? (
+            <Column
+              dataField={col}
+              key={col}
+              cellRender={() => (
+                <span>{Math.floor(Math.random() * 10) + 1}</span>
+              )}
+            />
+          ) : col === "createdAt" || col === "updatedAt" ? (
+            <Column
+              key={col}
+              dataField={col}
+              minWidth={250}
+              // cellRender={({ data }) => (
+              //   <span>{new Date(data[col]).toLocaleString()}</span>
+              // )}
+            />
+          ) : (
+            <Column dataField={col} />
+          )
+        )}
+        <Column
+          width={80}
+          cellRender={() => (
+            <Btn
+              elementAttr={{ cssClass: "editBtn" }}
+              render={() => (
+                <>
+                  <Image
+                    src="/icons/edit.svg"
+                    width={24}
+                    height={24}
+                    alt="Create"
+                  />
+                </>
+              )}
+              // onClick={() => showEditPopup(true)}
+            />
+          )}
+          caption="Actions"
+        />
+        {/* <Editing
           mode={tableFields.editingMode}
           useIcons={true}
           allowUpdating={tableFields.editable}
-        >
-          <Popup
+        > */}
+        {/* <Popup
             titleRender={renderTitle}
             showTitle={true}
             width={400}
@@ -196,11 +256,8 @@ export default function Table({
                 )
             )}
             <Item render={formToolbar} />
-          </Form>
-        </Editing>
-        <Column type="buttons" caption="Actions">
-          <Button icon="edit" />
-        </Column>
+          </Form> */}
+        {/* </Editing> */}
         <GridToolbar>
           <Item location="after">
             <Btn
@@ -223,7 +280,7 @@ export default function Table({
             <MainPopup
               title="Create Organization"
               visible={createPopupVisible}
-              contentRender={renderCreateOrganization}
+              contentRender={RenderCreateOrganization}
               width={400}
               height="100%"
               position={{ my: "top right", at: "top right", of: window }}

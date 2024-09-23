@@ -1,3 +1,5 @@
+"use server";
+
 export async function getOrganization() {
   const response = await fetch(`${process.env.API_HOST_URL}/v1/organization`, {
     mode: "no-cors",
@@ -14,7 +16,7 @@ export async function editOrganization(formData: FormData) {
   try {
     const { id } = formData;
     const response = await fetch(
-      `${process.env.NEXT_API_HOST_URL}/v1/organization/${id}`,
+      `${process.env.API_HOST_URL}/v1/organization/${id}`,
       {
         mode: "no-cors",
         method: "PUT",
@@ -33,7 +35,7 @@ export async function editOrganization(formData: FormData) {
   }
 }
 
-export async function createOrganization(formData: FormData) {
+export async function createOrganizationApi(formData: FormData) {
   try {
     const response = await fetch(
       `${process.env.API_HOST_URL}/v1/organization`,
