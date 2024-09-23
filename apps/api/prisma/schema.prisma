@@ -10,7 +10,8 @@ datasource db {
 
 model user {
   id        Int          @id @default(autoincrement())
-  name      String?      @db.VarChar
+  firstName String?      @db.VarChar
+  lastName  String?      @db.VarChar
   email     String?      @unique @db.VarChar
   password  String?      @db.VarChar  
   user      user_role[]

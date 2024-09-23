@@ -8,6 +8,7 @@ export async function getOrganization() {
       "Content-Type": "application/json",
     },
   });
+  console.log("qq", response);
   const data = await response.json();
   return data;
 }
@@ -36,6 +37,14 @@ export async function editOrganization(formData: FormData) {
 }
 
 export async function createOrganizationApi(formData: FormData) {
+  const createdAt = new Date().toISOString();
+  const data = { ...formData, createdAt };
+  const userData = {
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    email: formData.email,
+  };
+  console.log("qqq", userData);
   try {
     const response = await fetch(
       `${process.env.API_HOST_URL}/v1/organization`,
@@ -45,14 +54,17 @@ export async function createOrganizationApi(formData: FormData) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: formData,
+        body: JSON.stringify({ data }),
       }
     );
     if (response.status === 200) {
       const data = await response.json();
       return data;
+    } else {
+      console.log("qw", response);
     }
   } catch (error: any) {
+    console.log("err", error);
     return error;
   }
 }

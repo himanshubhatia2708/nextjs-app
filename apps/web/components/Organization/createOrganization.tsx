@@ -9,8 +9,9 @@ import {
   ButtonOptions,
   RequiredRule,
   EmailRule,
+  Label,
 } from "devextreme-react/form";
-import { getTimeZones } from "devextreme/time_zone_utils";
+// import { getTimeZones } from "devextreme/time_zone_utils";
 import { createOrganizationApi } from "./service";
 
 export default function RenderCreateOrganization() {
@@ -19,36 +20,42 @@ export default function RenderCreateOrganization() {
   const handleSubmit = async () => {
     const values = formRef.current!.instance().option("formData");
     const response = await createOrganizationApi(values);
-    console.log(response);
+    console.log("resp", response);
   };
 
-  const timeZones = getTimeZones(new Date());
+  // const timeZones = getTimeZones(new Date());
 
   return (
     <CreateForm ref={formRef}>
       <SimpleItem
         dataField="name"
-        editorOptions={{ placeholder: "Enter New Organization Name" }}
+        editorOptions={{ placeholder: "Enter new organization name" }}
       >
+        <Label text="Organization Name" />
         <RequiredRule message="Organization name is required" />
       </SimpleItem>
       <SimpleItem
-        dataField="firstName"
+        dataField="First name"
         editorOptions={{ placeholder: "FirstName" }}
-      />
+      >
+        <Label text="Organization Admin First Name" />
+      </SimpleItem>
       <SimpleItem
-        dataField="lastName"
+        dataField="Last name"
         editorOptions={{ placeholder: "LastName" }}
-      />
+      >
+        <Label text="Organization Admin Last Name" />
+      </SimpleItem>
       <SimpleItem
         dataField="email"
-        editorOptions={{ placeholder: "Enter Admin Email Address" }}
+        editorOptions={{ placeholder: "Enter admin email address" }}
       >
+        <Label text="Organization Admin Email Address" />
         <RequiredRule message="Email is required" />
         <EmailRule message="Invalid Email Address" />
       </SimpleItem>
       {/* <SimpleItem dataField="Number & Date Time format" editorOptions={{ placeholder: "Enter New Organization Name" }} /> */}
-      <SimpleItem
+      {/* <SimpleItem
         dataField="timezone"
         editorType="dxSelectBox"
         editorOptions={{
@@ -58,7 +65,7 @@ export default function RenderCreateOrganization() {
           displayExpr: "title",
           valueExpr: "title",
         }}
-      />
+      /> */}
       <ButtonItem horizontalAlignment="left" cssClass="btnform">
         <ButtonOptions
           text="Create Customer"
