@@ -72,15 +72,18 @@ const Table: React.FC<TableProps> = ({
   };
 
   const renderContent = () => {
+    const gridInstance = grid.current!.instance;
+    const rowKey = gridInstance().option("editing.editRowKey");
     return (
       <>
+        <div className="title">{`Are you sure, you want to delete ${rowKey?.name}?`}</div>
         <p>Type ‘delete’ in the field below</p>
         <DeleteForm onFieldDataChanged={formFieldDataChanged}>
           <SimpleItem
             dataField="."
             editorOptions={{
-              placeholder: "Enter delete",
-              // cssClass="text-transparent"
+              placeholder: "delete",
+              class: "delete-input",
             }}
           />
         </DeleteForm>
@@ -181,7 +184,6 @@ const Table: React.FC<TableProps> = ({
           <Popup
             titleRender={renderTitle}
             showTitle={true}
-            // title={`Edit ${grid.current?.instance()?.option("editing.editRowKey")?.name}`}
             width={400}
             height="100%"
             position={{ my: "top right", at: "top right", of: window }}
@@ -220,7 +222,7 @@ const Table: React.FC<TableProps> = ({
                   />
                 )
             )}
-            <Item colSpan={2} itemType="simple" render={formToolbar} />
+            <Item render={formToolbar} />
           </Form>
         </Editing>
         <Column type="buttons" caption="Actions">
@@ -231,16 +233,16 @@ const Table: React.FC<TableProps> = ({
             <Btn
               text="Create Organization"
               icon="plus"
-              className={`${styles.button_primary} mr-2.5`}
+              className={`${styles.button_primary}`}
               render={(buttonData) => (
                 <>
                   <Image
                     src="/icons/plus.svg"
-                    width={20}
-                    height={20}
-                    alt="Picture of the author"
+                    width={24}
+                    height={24}
+                    alt="Create"
                   />
-                  <span className="pl-2">{buttonData.text}</span>
+                  <span>{buttonData.text}</span>
                 </>
               )}
               onClick={() => setCreatePopupVisibility(true)}
@@ -254,6 +256,7 @@ const Table: React.FC<TableProps> = ({
               position={{ my: "top right", at: "top right", of: window }}
               onHiding={() => setCreatePopupVisibility(false)}
               showCloseButton={true}
+              wrapperAttr={{ class: "create-popup" }}
             />
           </Item>
           <Item location="after">
@@ -265,11 +268,11 @@ const Table: React.FC<TableProps> = ({
                 <>
                   <Image
                     src="/icons/filter.svg"
-                    width={20}
-                    height={20}
-                    alt="Picture of the author"
+                    width={24}
+                    height={24}
+                    alt="Filter"
                   />
-                  <span className="pl-2">Filter</span>
+                  <span>Filter</span>
                 </>
               )}
             />
@@ -279,12 +282,13 @@ const Table: React.FC<TableProps> = ({
         <SearchPanel visible={true} highlightCaseSensitive={true} />
       </DataGrid>
       <MainPopup
-        title="Are you sure, you want to delete Fauxbio?"
+        // title="Are you sure, you want to delete Fauxbio?"
         wrapperAttr={{ class: "delete-popup" }}
         visible={deletePopup !== -1}
         ref={deleteRef}
-        width="auto"
-        height="auto"
+        width="577px"
+        height="236px"
+        showCloseButton={true}
         onHiding={() => showDeletePopup(-1)}
         contentRender={renderContent}
         position={{ my: "center", at: "center", of: window }}

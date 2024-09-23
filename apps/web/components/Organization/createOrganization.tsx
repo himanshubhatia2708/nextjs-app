@@ -1,9 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
-import Image from "next/image";
-import Button from "devextreme-react/button";
-import { Popup as Modal } from "devextreme-react/popup";
-import styles from "./table.module.css";
+import { useRef } from "react";
 import "./table.css";
 import {
   Form as CreateForm,
@@ -15,7 +11,6 @@ import {
   EmailRule,
 } from "devextreme-react/form";
 import { getTimeZones } from "devextreme/time_zone_utils";
-import Textbox from "devextreme-react/text-box";
 import { createOrganization } from "@/components/Organization/service";
 
 export const RenderCreateOrganization = () => {
@@ -31,16 +26,28 @@ export const RenderCreateOrganization = () => {
 
   return (
     <CreateForm ref={formRef}>
-      <SimpleItem dataField="name">
+      <SimpleItem
+        dataField="name"
+        editorOptions={{ placeholder: "Enter New Organization Name" }}
+      >
         <RequiredRule message="Organization name is required" />
       </SimpleItem>
-      <SimpleItem dataField="firstName" />
-      <SimpleItem dataField="lastName" />
-      <SimpleItem dataField="email">
+      <SimpleItem
+        dataField="firstName"
+        editorOptions={{ placeholder: "FirstName" }}
+      />
+      <SimpleItem
+        dataField="lastName"
+        editorOptions={{ placeholder: "LastName" }}
+      />
+      <SimpleItem
+        dataField="email"
+        editorOptions={{ placeholder: "Enter Admin Email Address" }}
+      >
         <RequiredRule message="Email is required" />
         <EmailRule message="Invalid Email Address" />
       </SimpleItem>
-      {/* <SimpleItem dataField="Number & Date Time format" /> */}
+      {/* <SimpleItem dataField="Number & Date Time format" editorOptions={{ placeholder: "Enter New Organization Name" }} /> */}
       <SimpleItem
         dataField="timezone"
         editorType="dxSelectBox"
@@ -62,56 +69,3 @@ export const RenderCreateOrganization = () => {
     </CreateForm>
   );
 };
-
-const ToolbarComponent = () => {
-  const [createPopupVisible, setCreatePopupVisibility] = useState(false);
-
-  return (
-    <div className="flex justify-end mb-3">
-      <Button
-        text="Create Organization"
-        icon="plus"
-        className={`${styles.button_primary} mr-2.5`}
-        render={(buttonData) => (
-          <>
-            <Image src="/icons/plus.svg" width={20} height={20} alt="Create" />
-            <span className="pl-2">{buttonData.text}</span>
-          </>
-        )}
-        onClick={() => setCreatePopupVisibility(true)}
-      />
-      <Modal
-        title="Create Organization"
-        visible={createPopupVisible}
-        contentRender={RenderCreateOrganization}
-        width={400}
-        height="100%"
-        position={{ my: "top right", at: "top right", of: window }}
-        onHiding={() => setCreatePopupVisibility(false)}
-        showCloseButton={true}
-      />
-
-      <Button
-        text="Filter"
-        icon="filter"
-        className={styles.button_primary}
-        render={() => (
-          <>
-            <Image
-              src="/icons/filter.svg"
-              width={20}
-              height={20}
-              alt="Picture of the author"
-            />
-            <span className="pl-2">Filter</span>
-          </>
-        )}
-      />
-      <Textbox placeholder="Search" elementAttr={{ class: "search" }}>
-        {/* < */}
-      </Textbox>
-    </div>
-  );
-};
-
-export default ToolbarComponent;
