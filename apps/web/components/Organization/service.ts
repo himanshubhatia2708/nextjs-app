@@ -14,7 +14,7 @@ export async function editOrganization(formData: FormData) {
   try {
     const { id } = formData;
     const response = await fetch(
-      `${process.env.API_HOST_URL}/v1/organization/${id}`,
+      `${process.env.NEXT_API_HOST_URL}/v1/organization/${id}`,
       {
         mode: "no-cors",
         method: "PUT",
@@ -43,7 +43,7 @@ export async function createOrganization(formData: FormData) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: formData,
       }
     );
     if (response.status === 200) {

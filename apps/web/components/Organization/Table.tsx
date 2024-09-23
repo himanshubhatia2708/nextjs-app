@@ -21,42 +21,14 @@ import RadioGroup from "devextreme-react/radio-group";
 import "./table.css";
 import Toolbar, { Item as ToolbarItem } from "devextreme-react/toolbar";
 import styles from "./table.module.css";
-import {
-  editOrganization,
-  deleteOrganization,
-} from "@/components/Organization/service";
-
-type EditFieldType = {
-  dataField: string;
-  type?: string;
-  items?: string[];
-  required?: string;
-};
-
-interface TableFields {
-  columns: string[];
-  editable: boolean;
-  editingMode: string;
-  editFields: EditFieldType[];
-}
-
-interface DataFields {
-  name: string;
-  email: string;
-  status: string;
-}
-
-interface TableProps {
-  tableFields: TableFields;
-  renderCreateOrganization: React.FC;
-  data: DataFields;
-}
+import { editOrganization, deleteOrganization } from "./service";
+import { OrganizationTableProps } from "@/lib/definition";
 
 export default function Table({
   tableFields,
   renderCreateOrganization,
   data,
-}: TableProps) {
+}: OrganizationTableProps) {
   const timeZones = getTimeZones(new Date());
   const [deletePopup, showDeletePopup] = useState(-1);
   const [deleteVal, setDelete] = useState({ delete: "" });
@@ -175,6 +147,7 @@ export default function Table({
         showBorders={true}
         showColumnLines={true}
         ref={grid}
+        elementAttr={{ class: styles.table }}
       >
         <Editing
           mode={tableFields.editingMode}

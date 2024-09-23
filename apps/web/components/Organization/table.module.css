@@ -1,3 +1,30 @@
+.table {
+  .dx-form {
+    .dx-item-content {
+      display: block !important;
+      min-width: 100% !important;
+    }
+
+    .dx-field-item-label {
+      padding: 0 !important;
+      font-family: Lato;
+    }
+
+    .dx-field-item-label-text {
+      color: #000;
+      font-family: Lato;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .dx-radiobutton {
+      display: flex !important;
+    }
+  }
+}
+
 .button_primary {
   padding: 8px;
   justify-content: flex-end;

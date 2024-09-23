@@ -43,15 +43,15 @@
 }
 
 .dx-layout-manager .dx-field-item:not(.dx-first-col) {
-  padding-inline-start: 0 !important;
+  padding-inline-start: 0;
 }
 
 .dx-layout-manager .dx-field-item:not(.dx-last-col) {
-  padding-inline-end: 0 !important;
+  padding-inline-end: 0;
 }
 
 .dx-texteditor.dx-editor-filled:after {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
 .dx-texteditor-input-container {
@@ -63,23 +63,23 @@
 .dx-searchbox.dx-editor-filled .dx-texteditor-input,
 .dx-searchbox.dx-editor-outlined .dx-placeholder:before,
 .dx-searchbox.dx-editor-outlined .dx-texteditor-input {
-  -webkit-padding-start: 0 !important;
-  padding-inline-start: 0 !important;
-  padding: 5px 0 5px 45px !important;
+  -webkit-padding-start: 0;
+  padding-inline-start: 0;
+  padding: 5px 0 5px 45px;
 }
 
 .dx-searchbox.dx-editor-filled .dx-icon-search,
 .dx-searchbox.dx-editor-outlined .dx-icon-search {
-  width: 24px !important;
-  height: 24px !important;
+  width: 24px;
+  height: 24px;
 }
 
 .dx-collection {
-  display: flex !important;
+  display: flex;
 }
 
 .dx-collection .dx-radiobutton:not(:first-child) {
-  padding-inline-start: 2rem !important;
+  padding-inline-start: 2rem;
 }
 
 .dx-datagrid-headers {
@@ -88,9 +88,9 @@
   .dx-datagrid-text-content {
     color: #0f69af;
     font-family: Lato;
-    font-size: 14px !important;
+    font-size: 14px;
     font-style: normal;
-    font-weight: 700 !important;
+    font-weight: 700;
     line-height: normal;
   }
 }
@@ -114,14 +114,14 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    text-transform: unset !important;
+    text-transform: unset;
   }
 }
 
 .button_form_seconday {
   .dx-button {
-    background: #ecf5fc !important;
-    color: #50a0de !important;
+    background: #ecf5fc;
+    color: #50a0de;
   }
   .dx-button-text {
     font-family: Lato;
@@ -130,13 +130,13 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    text-transform: unset !important;
+    text-transform: unset;
   }
 }
 
 .btn_secondary {
-  background: #ecf5fc !important;
-  color: #50a0de !important;
+  background: #ecf5fc;
+  color: #50a0de;
   font-family: Lato;
   font-size: 0.875rem;
   font-style: normal;
@@ -144,7 +144,7 @@
   .dx-button-text {
     font-weight: 700;
     line-height: normal;
-    text-transform: unset !important;
+    text-transform: unset;
   }
 }
 
@@ -156,7 +156,7 @@
   align-items: flex-end;
   gap: 10px;
   border: 1px solid #0f69af;
-  background-color: #0f69af !important;
+  background-color: #0f69af;
 
   .dx-button-text {
     color: #fff;
@@ -165,13 +165,13 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    text-transform: unset !important;
+    text-transform: unset;
   }
 }
 
-.btn_primary.dx-state-disabled {
-  border: 1px solid #c7c7d1 !important;
-  background-color: #fff !important;
+.dx-state-disabled {
+  border: 1px solid #c7c7d1;
+  background-color: #fff;
 
   .dx-button-text {
     color: #e1e1ea;
@@ -182,7 +182,7 @@
 .edit-popup {
   z-index: 100 !important;
   .dx-toolbar:last-child {
-    display: none !important;
+    display: none;
   }
   .dx-popup-content {
     padding: 0;
