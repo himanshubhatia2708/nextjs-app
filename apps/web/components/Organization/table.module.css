@@ -1,17 +1,65 @@
+.table {
+  .dx-form {
+    .dx-item-content {
+      display: block !important;
+      min-width: 100% !important;
+    }
+
+    .dx-field-item-label {
+      padding: 0 !important;
+      font-family: Lato;
+    }
+
+    .dx-field-item-label-text {
+      color: #000;
+      font-family: Lato;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .dx-radiobutton {
+      display: flex !important;
+    }
+  }
+}
+
 .button_primary {
+  padding: 8px;
+  justify-content: flex-end;
+  align-items: center;
+  border: 1px solid var(--Full-Color-Set-RichBlue-400, #50a0de);
   background: #ecf5fc !important;
-  color: #50a0de !important;
+  color: #0a3b61 !important;
   font-family: Lato;
-  font-size: 0.875rem;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
   text-transform: unset !important;
 }
 
+.button_primary span {
+  padding-left: 17px;
+}
+
 .search {
+  display: flex;
+  /* width: 194px;
+  height: 40px; */
+  padding: 8px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
   background: #c7c7d1;
   border: 1px solid #c7c7d1;
+  color: #8b8b9c;
+  font-family: Lato;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .edit_title {

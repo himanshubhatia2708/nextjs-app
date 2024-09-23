@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import { isAuthenticated } from "@/utils/auth";
@@ -13,6 +14,10 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"], // Specify weights you want to use
 });
 
 export const metadata: Metadata = {
@@ -31,7 +36,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${openSans.className} antialiased`}
       >
         {isAuth && <Header />}
         {children}
