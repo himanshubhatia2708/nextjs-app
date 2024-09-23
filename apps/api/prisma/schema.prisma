@@ -2,7 +2,7 @@ generator client {
   provider = "prisma-client-js"
   previewFeatures = ["relationJoins"]
 }
- 
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -47,7 +47,7 @@ model organization {
   createdAt DateTime     @default(now()) @db.Timestamp(6)
   updatedAt DateTime     @default(now()) @db.Timestamp(6)
 }
- 
+
 enum status_type {
   Disabled @map("0")
   Enabled  @map("1")
