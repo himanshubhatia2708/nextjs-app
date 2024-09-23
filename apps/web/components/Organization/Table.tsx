@@ -52,11 +52,11 @@ interface TableProps {
   data: DataFields;
 }
 
-const Table: React.FC<TableProps> = ({
+export default function Table({
   tableFields,
   renderCreateOrganization,
   data,
-}) => {
+}: TableProps) {
   const timeZones = getTimeZones(new Date());
   const [deletePopup, showDeletePopup] = useState(-1);
   const [deleteVal, setDelete] = useState({ delete: "" });
@@ -295,6 +295,4 @@ const Table: React.FC<TableProps> = ({
       />
     </>
   );
-};
-
-export default Table;
+}

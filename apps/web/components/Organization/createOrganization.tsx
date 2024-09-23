@@ -13,7 +13,7 @@ import {
 import { getTimeZones } from "devextreme/time_zone_utils";
 import { createOrganization } from "@/components/Organization/service";
 
-export const RenderCreateOrganization = () => {
+export default function RenderCreateOrganization() {
   const formRef = useRef<FormRef>(null);
 
   const handleSubmit = async () => {
@@ -68,4 +68,4 @@ export const RenderCreateOrganization = () => {
       </ButtonItem>
     </CreateForm>
   );
-};
+}

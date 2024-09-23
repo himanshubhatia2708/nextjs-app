@@ -6,7 +6,7 @@ import { isAuthenticated } from "@/utils/auth";
 
 import styles from "./page.module.css";
 import { tableFields } from "@/utils/constants";
-import { RenderCreateOrganization } from "@/components/Organization/createOrganization";
+import RenderCreateOrganization from "@/components/Organization/createOrganization";
 import { getOrganization } from "@/components/Organization/service";
 
 export default async function Organization() {
