@@ -11,6 +11,8 @@ import DataGrid, {
   SearchPanel,
   Toolbar as GridToolbar,
   DataGridRef,
+  Paging,
+  Sorting,
 } from "devextreme-react/data-grid";
 import Image from "next/image";
 import { Popup as MainPopup, PopupRef } from "devextreme-react/popup";
@@ -160,6 +162,8 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
         ref={grid}
         elementAttr={{ class: styles.table }}
       >
+        <Paging defaultPageSize={5} defaultPageIndex={0} />
+        <Sorting mode="single" />
         {tableFields.columns.map((col) =>
           col === "organizationAdmin" ? (
             <Column
@@ -181,9 +185,9 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
               key={col}
               dataField={col}
               minWidth={250}
-              // cellRender={({ data }) => (
-              //   <span>{new Date(data[col]).toLocaleString()}</span>
-              // )}
+            // cellRender={({ data }) => (
+            //   <span>{new Date(data[col]).toLocaleString()}</span>
+            // )}
             />
           ) : (
             <Column dataField={col} />
@@ -204,7 +208,7 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
                   />
                 </>
               )}
-              // onClick={() => showEditPopup(true)}
+            // onClick={() => showEditPopup(true)}
             />
           )}
           caption="Actions"

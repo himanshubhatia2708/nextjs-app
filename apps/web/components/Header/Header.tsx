@@ -8,25 +8,24 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const dropDownItems: DropDownItem[] = [
-    {
-        label: 'username@miliporesigma.com',
-        value: 'email',
-    },
-    {
-        label: 'Profile',
-        value: 'Profile',
-        link: '/profile'
-    },
-    {
-        label: 'Logout',
-        value: 'Logout',
-    }
-]
-
-export default function Header() {
+export default function Header({ userData }: any) {
     const router = useRouter();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropDownItems: DropDownItem[] = [
+        {
+            label: userData,
+            value: 'email',
+        },
+        {
+            label: 'Profile',
+            value: 'Profile',
+            link: '/profile'
+        },
+        {
+            label: 'Logout',
+            value: 'Logout',
+        }
+    ]
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
