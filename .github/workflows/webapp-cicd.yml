@@ -34,7 +34,7 @@ jobs:
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
-        role-to-assume: ${{DEV_AWS_ROLE }}
+        role-to-assume: arn:aws:iam::851725573613:role/github-oidc-aidd-syncoop-githubactions-role
         aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
     - name:  Copy next js out folder to s3
