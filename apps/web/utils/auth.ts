@@ -59,6 +59,5 @@ export async function clearSession() {
 }
 
 export async function isAuthenticated() {
-    console.log(1, cookies().has('session'));
     return cookies().has('session');
 }
