@@ -5,7 +5,7 @@ on:
 
 env:
   AWS_REGION: us-east-1                          # set aws region
-  AWS_BUCKET_NAME : arn:aws:s3:::aidd-syncoop-webapp-dev
+  AWS_BUCKET_NAME : aidd-syncoop-webapp-dev
   NODE_VERSION: '20.11.1'                        # set node version 
 
 # permission can be added at job level or workflow level
@@ -28,4 +28,4 @@ jobs:
       # Upload a file to AWS s3
     - name:  Copy next js out folder to s3
       run: |
-        aws s3 cp ./README.md ${{ env.AWS_BUCKET_NAME }}
+        aws s3 cp ./README.md s3://${{ env.AWS_BUCKET_NAME }}/
