@@ -133,7 +133,6 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
           width={80}
           cellRender={({ data }: any) => (
             <Btn
-              disabled={true}
               render={() => (
                 <>
                   <Image

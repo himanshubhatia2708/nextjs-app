@@ -11,6 +11,7 @@ import Breadcrumb from "@/components/Breadcrumbs/BreadCrumbs";
 
 export default async function Dashboard() {
   if (!(await isAuthenticated())) {
+    console.log('pp')
     revalidatePath("/");
     redirect("/");
   }
@@ -40,7 +41,8 @@ export default async function Dashboard() {
     },
   ];
 
-  const response = await getOrganization();
+  let response;
+  if (!response) response = await getOrganization();
 
   return (
     <>

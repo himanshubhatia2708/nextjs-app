@@ -297,15 +297,23 @@
 .buttons-group {
   display: flex;
   width: 100%;
-  justify-content: end;
+  justify-content: space-between;
 
   .dx-item-content {
     display: inline;
+  }
+
+  .dx-field-item-content {
+    width: 100%;
   }
 }
 
 .buttons-group .dx-item-content {
   gap: 10px;
+}
+
+.buttons-group .dx-item-content:last-child {
+  flex:0;
 }
 
 .form-button-container {
