@@ -3,6 +3,7 @@
   justify-content: flex-end;
   align-items: center;
   border: 1px solid var(--Full-Color-Set-RichBlue-400, #50a0de);
+  border-radius: 0;
   background: #ecf5fc !important;
   color: #0a3b61 !important;
   font-family: Lato;

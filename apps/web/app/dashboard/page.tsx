@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { isAuthenticated } from "@/utils/auth";
 import Table from "@/components/Organization/ListOrganization";
 import Image from "next/image";
-import { tableFields } from "@/utils/constants";
 import { getOrganization } from "@/components/Organization/service";
 import { BreadCrumbsObj } from "@/lib/definition";
 import Breadcrumb from "@/components/Breadcrumbs/BreadCrumbs";
@@ -56,7 +55,7 @@ export default async function Dashboard() {
           <span>Customer Organizations</span>
         </main>
         <div className={styles.table}>
-          <Table tableFields={tableFields} data={response} />
+          <Table data={response} />
         </div>
       </div>
     </>

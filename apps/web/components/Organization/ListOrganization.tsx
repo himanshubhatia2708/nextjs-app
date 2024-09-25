@@ -20,7 +20,7 @@ import RenderCreateOrganization from "./createOrganization";
 import EditOrganization from "./editOrganization";
 import { formatDate } from "@/utils/dateFormat";
 
-export default function Table({ tableFields, data }: OrganizationTableProps) {
+export default function Table({ data }: OrganizationTableProps) {
   const [editPopup, showEditPopup] = useState(false);
   const [editField, setEditField] = useState({});
   const [deletePopup, showDeletePopup] = useState(-1);
@@ -83,52 +83,54 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
       >
         <Paging defaultPageSize={5} defaultPageIndex={0} />
         <Sorting mode="single" />
-        {tableFields.columns.map((col) =>
-          col === "organizationAdmin" ? (
-            <Column
-              dataField={col}
-              key={col}
-              minWidth={350}
-              cellRender={({ data }: any) => <span>{data.user.email}</span>}
-            />
-          ) : col === "name" ? (
-            <Column dataField={col} key={col} caption="Organization Name" />
-          ) : col === "status" ? (
-            <Column dataField={col} key={col} alignment="center" caption="Organization Status" />
-          ) : col === "createdAt" ? (
-            <Column
-              dataField={col}
-              key={col}
-              caption="Creation Date"
-              defaultSortIndex={0}
-              defaultSortOrder="desc"
-              cellRender={({ data }) => (
-                <span>{formatDate(data.createdAt)}</span>
-              )}
-            />
-          ) : col === "updatedAt" ? (
-            <Column
-              dataField={col}
-              key={col}
-              caption="Last Modified Date"
-              cellRender={({ data }) => (
-                <span>{formatDate(data.updatedAt)}</span>
-              )}
-            />
-          ) : col === "projects" || col === "molecules" || col === "users" ? (
-            <Column
-              dataField={col}
-              key={col}
-              width={col === "users" ? 70 : 90}
-              alignment="center"
-              cellRender={() => (
-                <span>0</span>
-              )}
-            />
-          ) : (
-            <Column dataField={col} />
-          )
-        )}
+        <Column dataField="name" caption="Organization Name" />
+        <Column
+          dataField="projects"
+          width={90}
+          alignment="center"
+          cellRender={() => (
+            <span>0</span>
+          )}
+        />
+        <Column
+          dataField="molecules"
+          width={90}
+          alignment="center"
+          cellRender={() => (
+            <span>0</span>
+          )}
+        />
+        <Column
+          dataField="users"
+          width={70}
+          alignment="center"
+          cellRender={() => (
+            <span>0</span>
+          )}
+        />
+        <Column dataField="status" alignment="center" caption="Organization Status" />
+        <Column
+          dataField="organizationAdmin"
+          minWidth={350}
+          allowSorting={false}
+          cellRender={({ data }: any) => <span>{data.user.email}</span>}
+        />
+        <Column
+          dataField="createdAt"
+          caption="Creation Date"
+          defaultSortIndex={0}
+          defaultSortOrder="desc"
+          cellRender={({ data }) => (
+            <span>{formatDate(data.createdAt)}</span>
+          )}
+        />
+        <Column
+          dataField="updatedAt"
+          caption="Last Modified Date"
+          cellRender={({ data }) => (
+            <span>{formatDate(data.updatedAt)}</span>
+          )}
+        />
         <Column
           width={80}
           cellRender={({ data }: any) => (
@@ -214,7 +216,7 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
             <Btn
               text="Filter"
               icon="filter"
-              elementAttr={{ class: "btn_primary btn-toolbar" }}
+              elementAttr={{ class: "btn_primary btn-toolbar btn-filter" }}
               disabled={true}
               render={() => (
                 <>

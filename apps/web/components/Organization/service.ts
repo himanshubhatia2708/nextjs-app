@@ -13,7 +13,6 @@ export async function getOrganization() {
 }
 
 export async function editOrganization() {
-  // console.log(formData);
 }
 
 export async function createOrganizationApi(formData: FormData) {

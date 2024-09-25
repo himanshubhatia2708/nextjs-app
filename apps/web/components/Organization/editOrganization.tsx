@@ -3,8 +3,6 @@
 import React from "react";
 import style from "./table.module.css";
 import styles from "../LoginForm/LoginForm.module.css";
-// import { createOrganizationApi } from "./service";
-import { status } from "@/utils/constants";
 
 export default function EditOrganization({
   data,
@@ -13,20 +11,6 @@ export default function EditOrganization({
 }: any) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const formData = new FormData(event.currentTarget);
-    // console.log("qw", formData);
-    // const isValidated = await createOrganizationApi(formData);
-    // console.log("qqq", isValidated);
-    // if (isValidated) {
-    //   if (Object(isValidated).hasOwnProperty("errors")) {
-    //     console.log("Error");
-    //   } else {
-    //     // router.push("/dashboard");
-    //   }
-    // } else {
-    //   console.log("False");
-    // }
-    // return false;
   };
 
   return (
@@ -47,20 +31,30 @@ export default function EditOrganization({
         </div>
         <div className="flex flex-col gap-2">
           <div className="mt-3 flex">
-            {/* Radio */}
-            {status.map((item, idx) => (
-              <span key={idx} className="flex items-center gap-x-2.5 mr-2">
-                <input
-                  type="radio"
-                  name="role"
-                  className="form-radio border-gray-400 text-indigo-600 focus:ring-indigo-600 duration-150"
-                  defaultChecked={data.status === item}
-                />
-                <label className="text-sm text-gray-700 font-medium">
-                  {item}
-                </label>
-              </span>
-            ))}
+            <span className="flex items-center gap-x-2.5 mr-2">
+              <input
+                type="radio"
+                name="role"
+                className="form-radio border-gray-400 text-indigo-600 focus:ring-indigo-600 duration-150"
+                defaultChecked={data.status === 'Enabled'}
+              />
+              <label className="text-sm text-gray-700 font-medium">
+                Enabled
+              </label>
+            </span>
+          </div>
+          <div className="mt-3 flex">
+            <span className="flex items-center gap-x-2.5 mr-2">
+              <input
+                type="radio"
+                name="role"
+                className="form-radio border-gray-400 text-indigo-600 focus:ring-indigo-600 duration-150"
+                defaultChecked={data.status === 'Disabled'}
+              />
+              <label className="text-sm text-gray-700 font-medium">
+                Disabled
+              </label>
+            </span>
           </div>
         </div>
         <h3 className={`${style.functional_assay} mt-[27px]`}>
