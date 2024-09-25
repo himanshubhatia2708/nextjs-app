@@ -15,6 +15,7 @@ const geistMono = localFont({
 });
 const openSans = Open_Sans({
   subsets: ["latin"],
+  preload: false,
   weight: ["400", "700"], // Specify weights you want to use
 });
 

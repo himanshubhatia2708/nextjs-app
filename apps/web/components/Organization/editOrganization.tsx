@@ -1,101 +1,140 @@
+
 "use client";
 
-import Image from "next/image";
-import React, { useState } from "react";
-import styles from "./LoginForm.module.css";
-import { Messages } from "@/utils/message";
+import React from "react";
+import style from "./table.module.css";
+import styles from "../LoginForm/LoginForm.module.css";
 
-export default function LoginForm() {
-  const [message, setMessage] = useState("");
+export default function EditOrganization({
+  data,
+  showEditPopup,
+  showDeletePopup,
+}: any) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const formData = new FormData(event.currentTarget);
-    // const isValidated = await authorize(formData);
-    // if (isValidated) {
-    //   if (Object(isValidated).hasOwnProperty("errors")) {
-    //     console.log("Error");
-    //   } else {
-    //     router.push("/dashboard");
-    //   }
-    // } else {
-    //   console.log("False");
-    // }
-    return false;
-  };
-
-  const handleForgotPassword = () => {
-    setMessage("Please request System Admin to re-generate your password");
   };
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col w-[540px] h-[490px] p-[32px] gap-[10px] border-2 border-[#ECECF4] bg-white rounded-[8px]"
-      >
+      <form onSubmit={handleSubmit} className="editForm">
         <div className="mb-6 flex flex-col gap-2">
-          <Image
-            src="/icons/M-icon.svg"
-            alt="Merck logo"
-            priority
-            width={64}
-            height={30}
-          />
-        </div>
-        <div className="mb-6 flex flex-col gap-2">
-          <h1 className={styles.customHeadline}>Welcome!</h1>
-        </div>
-        <div className="mb-6 flex flex-col gap-2">
-          <label htmlFor="email" className={styles.customEmailLabel}>
-            Email Address
+          <label htmlFor="organizationName" className={styles.customEmailLabel}>
+            Organization Name
           </label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
-            placeholder="Enter your email"
+            id="organizationName"
+            name="organizationName"
+            className={`border border-gray-300 rounded-[4px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+            placeholder="Enter new organization name"
             required
+            defaultValue={data.name}
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className={styles.customEmailLabel}>
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className={`border border-gray-300 rounded-[4px] w-[476px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
-            placeholder="Enter your password"
-            required
-          />
-          <div className="flex gap-1.5">
-            <Image
-              src="/icons/info-icon.svg"
-              alt="Forgot Password"
-              priority
-              width={14}
-              height={15}
-            />
-            <span
-              className="text-black text-sm font-bold leading-tight cursor-pointer"
-              onClick={handleForgotPassword}
-            >
-              Forgot password?
+          <div className="mt-3 flex">
+            <span className="flex items-center gap-x-2.5 mr-2">
+              <input
+                type="radio"
+                name="role"
+                className="form-radio border-gray-400 text-indigo-600 focus:ring-indigo-600 duration-150"
+                defaultChecked={data.status === 'Enabled'}
+              />
+              <label className="text-sm text-gray-700 font-medium">
+                Enabled
+              </label>
+            </span>
+          </div>
+          <div className="mt-3 flex">
+            <span className="flex items-center gap-x-2.5 mr-2">
+              <input
+                type="radio"
+                name="role"
+                className="form-radio border-gray-400 text-indigo-600 focus:ring-indigo-600 duration-150"
+                defaultChecked={data.status === 'Disabled'}
+              />
+              <label className="text-sm text-gray-700 font-medium">
+                Disabled
+              </label>
             </span>
           </div>
         </div>
-        <div className={`mb-3 flex flex-col text-sm ${styles.errorMessage}`}>
-          {message && Messages.forgotPassword}
+        <h3 className={`${style.functional_assay} mt-[27px]`}>
+          Functional Assay
+        </h3>
+        <div className="mb-6 flex flex-col gap-2">
+          <label htmlFor="organizationName" className={styles.customEmailLabel}>
+            Functional Assay 1
+          </label>
+          <input
+            id="organizationName"
+            name="organizationName"
+            className={`border border-gray-300 rounded-[4px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+            placeholder="First name"
+            required
+            defaultValue={data.name}
+          />
         </div>
         <div className="mb-6 flex flex-col gap-2">
-          <button
-            type="submit"
-            className="w-24 h-10 p-3 bg-[#0f69af] rounded justify-center items-center inline-flex text-white text-base font-bold font-['Lato'] leading-tight"
-          >
-            Login
-          </button>
+          <label htmlFor="organizationName" className={styles.customEmailLabel}>
+            Functional Assay 2
+          </label>
+          <input
+            id="organizationName"
+            name="organizationName"
+            className={`border border-gray-300 rounded-[4px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+            placeholder="First name"
+            required
+            defaultValue={data.name}
+          />
+        </div>
+        <div className="mb-6 flex flex-col gap-2">
+          <label htmlFor="organizationName" className={styles.customEmailLabel}>
+            Functional Assay 3
+          </label>
+          <input
+            id="organizationName"
+            name="organizationName"
+            className={`border border-gray-300 rounded-[4px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+            placeholder="First name"
+            required
+            defaultValue={data.name}
+          />
+        </div>
+        <div className="mb-6 flex flex-col gap-2">
+          <label htmlFor="organizationName" className={styles.customEmailLabel}>
+            Functional Assay 4
+          </label>
+          <input
+            id="organizationName"
+            name="organizationName"
+            className={`border border-gray-300 rounded-[4px] h-[40px] flex-shrink-0 p-3 bg-[#f8f8fc] text-[#838393] ${styles.customEmailInput}`}
+            placeholder="First name"
+            required
+            defaultValue={data.name}
+          />
+        </div>
+
+        <div className="mb-6 mt-[17px] flex gap-2 justify-between">
+          <div className="mb-6 flex gap-2">
+            <button type="submit" className="btn_primary">
+              Save
+            </button>
+            <button
+              onClick={() => showEditPopup(false)}
+              className="btn_secondary"
+            >
+              Cancel
+            </button>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="btn_primary"
+              onClick={() => showDeletePopup(true)}
+            >
+              {`Delete ${data.name}`}
+            </button>
+          </div>
         </div>
       </form>
     </div>

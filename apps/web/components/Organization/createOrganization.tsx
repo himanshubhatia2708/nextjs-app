@@ -1,9 +1,6 @@
-"use client";
-import { useRef } from "react";
-import "./table.css";
+import toast from "react-hot-toast";
 import {
   Form as CreateForm,
-  FormRef,
   SimpleItem,
   ButtonItem,
   ButtonOptions,
@@ -11,22 +8,36 @@ import {
   EmailRule,
   Label,
 } from "devextreme-react/form";
-// import { getTimeZones } from "devextreme/time_zone_utils";
+import { delay } from "@/utils/helpers";
 import { createOrganizationApi } from "./service";
+import "./table.css";
 
-export default function RenderCreateOrganization() {
-  const formRef = useRef<FormRef>(null);
+export default function RenderCreateOrganization({
+  setCreatePopupVisibility,
+  setTableData,
+  formRef,
+  tableData,
+}: any) {
 
   const handleSubmit = async () => {
     const values = formRef.current!.instance().option("formData");
-    const response = await createOrganizationApi(values);
-    console.log("resp", response);
+    if (formRef.current!.instance().validate().isValid) {
+      const response = await createOrganizationApi(values);
+      if (!response.error) {
+        const tempData = [...tableData, response];
+        formRef.current!.instance().reset();
+        setTableData(tempData);
+        setCreatePopupVisibility(false);
+      } else {
+        const toastId = toast.error(`${response.error}`);
+        await delay(2000);
+        toast.remove(toastId);
+      }
+    }
   };
 
-  // const timeZones = getTimeZones(new Date());
-
   return (
-    <CreateForm ref={formRef}>
+    <CreateForm ref={formRef} showValidationSummary={true}>
       <SimpleItem
         dataField="name"
         editorOptions={{ placeholder: "Enter new organization name" }}
@@ -35,14 +46,14 @@ export default function RenderCreateOrganization() {
         <RequiredRule message="Organization name is required" />
       </SimpleItem>
       <SimpleItem
-        dataField="First name"
-        editorOptions={{ placeholder: "FirstName" }}
+        dataField="firstName"
+        editorOptions={{ placeholder: "Organization Admin first name" }}
       >
         <Label text="Organization Admin First Name" />
       </SimpleItem>
       <SimpleItem
-        dataField="Last name"
-        editorOptions={{ placeholder: "LastName" }}
+        dataField="lastName"
+        editorOptions={{ placeholder: "Organization Admin last name" }}
       >
         <Label text="Organization Admin Last Name" />
       </SimpleItem>
@@ -54,21 +65,9 @@ export default function RenderCreateOrganization() {
         <RequiredRule message="Email is required" />
         <EmailRule message="Invalid Email Address" />
       </SimpleItem>
-      {/* <SimpleItem dataField="Number & Date Time format" editorOptions={{ placeholder: "Enter New Organization Name" }} /> */}
-      {/* <SimpleItem
-        dataField="timezone"
-        editorType="dxSelectBox"
-        editorOptions={{
-          dataSource: timeZones,
-          placeholder: "Select a time zone",
-          searchEnabled: true,
-          displayExpr: "title",
-          valueExpr: "title",
-        }}
-      /> */}
       <ButtonItem horizontalAlignment="left" cssClass="btnform">
         <ButtonOptions
-          text="Create Customer"
+          text="Create Organization"
           useSubmitBehavior={true}
           onClick={handleSubmit}
         />
