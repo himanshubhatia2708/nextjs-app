@@ -15,7 +15,6 @@ import { Form as DeleteForm, SimpleItem } from "devextreme-react/form";
 import { Button as Btn } from "devextreme-react/button";
 import "./table.css";
 import styles from "./table.module.css";
-import { deleteOrganization } from "./service";
 import { OrganizationTableProps } from "@/lib/definition";
 import RenderCreateOrganization from "./createOrganization";
 import EditOrganization from "./editOrganization";
@@ -31,11 +30,6 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
 
   const formFieldDataChanged = (e: any) => {
     setDelete({ delete: e.value });
-  };
-
-  const deleteOrganizationData = async () => {
-    await deleteOrganization(deletePopup);
-    window.location.reload();
   };
 
   const renderContent = () => {
@@ -54,7 +48,6 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
         </DeleteForm>
         <Btn
           text="Delete"
-          onClick={() => deleteOrganizationData()}
           elementAttr={{ class: "btn_primary" }}
           disabled={deleteVal.delete !== "delete"}
         />
@@ -161,7 +154,7 @@ export default function Table({ tableFields, data }: OrganizationTableProps) {
             <Btn
               text="Create Organization"
               icon="plus"
-              className={`${styles.button_primary} mr-[20px]`}
+              className={`${styles.button_primary_toolbar} mr-[20px]`}
               render={(buttonData: any) => (
                 <>
                   <Image
