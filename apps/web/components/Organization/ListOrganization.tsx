@@ -110,9 +110,9 @@ export default function Table({ data }: OrganizationTableProps) {
         />
         <Column dataField="status" alignment="center" caption="Organization Status" />
         <Column
-          dataField="organizationAdmin"
+          dataField="user.email"
           minWidth={350}
-          allowSorting={false}
+          caption="Organization Admin"
           cellRender={({ data }: any) => <span>{data.user.email}</span>}
         />
         <Column
