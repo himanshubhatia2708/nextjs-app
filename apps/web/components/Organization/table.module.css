@@ -37,7 +37,8 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  text-transform: unset !important;
+  text-transform: unset;
+  height: 40px;
 }
 
 .button_primary span {
@@ -73,4 +74,13 @@
 
 .editBtn {
   box-shadow: none;
+}
+
+.functional_assay {
+  color: #0a3b61;
+  font-family: Lato;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 42px;
 }

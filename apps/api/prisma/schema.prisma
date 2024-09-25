@@ -42,7 +42,6 @@ model organization {
   id        Int          @id @default(autoincrement())
   name      String
   userId    Int          @unique
-  timezone  String
   status    status_type?
   createdAt DateTime     @default(now()) @db.Timestamp(6)
   updatedAt DateTime     @default(now()) @db.Timestamp(6)
@@ -50,7 +49,6 @@ model organization {
 }
 
 enum status_type {
-  Disable @map("0")
-  Enable  @map("1")
-  Delete  @map("2")
+  Disabled @map("0")
+  Enabled  @map("1")
 }

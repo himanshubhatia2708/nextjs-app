@@ -12,14 +12,36 @@ export async function getOrganization() {
   return data;
 }
 
-export async function editOrganization(formData: FormData) {
-  console.log(formData);  
+export async function editOrganization() {
+  // console.log(formData);
 }
 
 export async function createOrganizationApi(formData: FormData) {
-  console.log(formData);
+  try {
+    const response: any = await fetch(
+      `${process.env.API_HOST_URL}/v1/organization`,
+      {
+        mode: "no-cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+
+    if (response.status === 200) {
+      const data = await response.json();
+      return data;
+    } else if (response.status === 500) {
+      const error = await response.json();
+      return {status: response.status, error};
+    }
+  } catch (error: any) {
+    return error;
+  }
 }
 
-export async function deleteOrganization(id: number) {
-  console.log(id);
+export async function deleteOrganization() {
+  // console.log(id);
 }
