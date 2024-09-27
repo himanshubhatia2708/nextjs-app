@@ -170,6 +170,7 @@ cd apps\api
 npx prisma migrate dev
 ```
 
+### Prisma commands to pull and push schema from database
 To pull database update from your postgres DB, run below command
 
 ```
