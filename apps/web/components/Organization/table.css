@@ -224,7 +224,7 @@
 }
 
 .create-popup {
-  .dx-overlay-content {
+  .dx-popup-normal {
     background: #ECECF4;
     box-shadow: -18px 0px 18px 0px rgba(0, 0, 0, 0.25);
   }
@@ -279,7 +279,6 @@
 
   .title {
     color: #000;
-    font-family: var(--font-openSans);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -294,7 +293,6 @@
   p,
   .dx-texteditor-input {
     color: #000;
-    font-family: var(--font-openSans);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
