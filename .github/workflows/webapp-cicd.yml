@@ -47,4 +47,4 @@ jobs:
       - name: Copy Next.js .next folder to S3
         run: |
           #cd apps/web/.next
-          aws s3 cp .next s3://${{ env.AWS_BUCKET_NAME }}/ --recursive  # Copy the build output to S3
+          aws s3 cp ./out s3://${{ env.AWS_BUCKET_NAME }}/ --recursive  # Copy the build output to S3
