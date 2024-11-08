@@ -1,13 +1,13 @@
 on:
   push:
     branches:
-      - feature/aws  # Run this workflow only on the 'feature/aws' branch
+      - feature/next-app  # Run this workflow only on the 'feature/aws' branch
   workflow_dispatch:  # Manual trigger option
   
 
 env:
   AWS_REGION: us-east-1                          # Set AWS region
-  AWS_BUCKET_NAME: "aidd-syncoop-webapp-dev"
+  AWS_BUCKET_NAME: "aidd-syncoop-next-app"
   NODE_VERSION: '20.11.1'                        # Set Node.js version
 
 permissions:
@@ -36,7 +36,7 @@ jobs:
       - name: Build Web # Build only the 'web' project
         run: 
           #cd apps/web
-          pnpm build --filter=web # Build the Next.js project located in apps/web
+          pnpm build # Build the Next.js project located in apps/web
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -46,5 +46,5 @@ jobs:
 
       - name: Copy Next.js .next folder to S3
         run: |
-          cd apps/web/.next
-          aws s3 cp . s3://${{ env.AWS_BUCKET_NAME }}/ --recursive  # Copy the build output to S3
+          #cd apps/web/.next
+          aws s3 cp ./out s3://${{ env.AWS_BUCKET_NAME }}/ --recursive  # Copy the build output to S3
