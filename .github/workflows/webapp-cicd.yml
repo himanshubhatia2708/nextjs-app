@@ -1,0 +1,50 @@
+on:
+  push:
+    branches:
+      - feature/aws  # Run this workflow only on the 'feature/aws' branch
+  workflow_dispatch:  # Manual trigger option
+  
+
+env:
+  AWS_REGION: us-east-1                          # Set AWS region
+  AWS_BUCKET_NAME: "aidd-syncoop-webapp-dev"
+  NODE_VERSION: '20.11.1'                        # Set Node.js version
+
+permissions:
+  id-token: write   # Required for requesting the JWT from AWS
+  contents: read    # Required for actions/checkout
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: SYNCOOP-AWS-DEV
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm globally
+        run: npm install --global pnpm  # Install pnpm globally only once
+
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: ${{ env.NODE_VERSION }}
+      #     cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install  # Install project dependencies, including turbo
+
+      - name: Build Web # Build only the 'web' project
+        run: 
+          #cd apps/web
+          pnpm build --filter=web # Build the Next.js project located in apps/web
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::851725573613:role/github-oidc-aidd-syncoop-githubactions-role
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Copy Next.js .next folder to S3
+        run: |
+          cd apps/web/.next
+          aws s3 cp . s3://${{ env.AWS_BUCKET_NAME }}/ --recursive  # Copy the build output to S3
